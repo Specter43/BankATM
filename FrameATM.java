@@ -3,6 +3,8 @@ import java.awt.*;
 
 public class FrameATM extends JFrame {
     private JFrame frame;
+    private Account currentAccount;
+    private boolean isManager;
 
     public FrameATM() {
         frame = new JFrame();

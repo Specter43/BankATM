@@ -9,7 +9,7 @@ public class PersonnelCustomer extends Personnel {
     public void viewTransactions() {}
     public void viewBalance() {}
     public void deposit() {}
-    public void withdrawal() {}
+    public void withdraw() {}
     public void transferFunds(Account from, Account to) {}
 
 }

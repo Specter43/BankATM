@@ -1,4 +1,7 @@
+package Personnel;
+
 import java.util.ArrayList;
+import Service.ServiceStockMarket;
 
 public class PersonnelManager extends Personnel {
     private ServiceStockMarket serviceStockMarket;

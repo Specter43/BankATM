@@ -1,3 +1,7 @@
+package Personnel;
+
+import Account.Account;
+
 import java.util.HashMap;
 
 public class PersonnelCustomer extends Personnel {

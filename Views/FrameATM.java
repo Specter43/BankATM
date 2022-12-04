@@ -1,3 +1,7 @@
+package Views;
+
+import Account.Account;
+
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,3 +1,5 @@
+package Input;
+
 public class FileOperator {
     public void read(String filename) {}
 

@@ -1,7 +1,7 @@
 package Account;
 
 public class AccountChecking extends Account {
-    private double transactionFee;
+    private static double transactionFee = 50;
 
     public void withdrawal() {}
 }

@@ -1,5 +1,7 @@
+package Service;
+
 /**
- * HoldingStock is the stock that a customer gets when he buys a stock
+ * Service.HoldingStock is the stock that a customer gets when he buys a stock
  * from the stock market.
  * It has:
  * ServiceStock: the stock

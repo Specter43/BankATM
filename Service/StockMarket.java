@@ -9,9 +9,10 @@ import java.util.List;
 
 public class StockMarket extends Service {
 
+    static private StockMarket market;
     private HashMap<LocalDate, List<Stock>> stocks;
 
-    public StockMarket() {
+    private StockMarket() {
         initializeStockMarket();
     }
 
@@ -34,6 +35,14 @@ public class StockMarket extends Service {
     public HashMap<LocalDate, List<Stock>> getStocks() {
         return stocks;
     }
+
+    static public StockMarket getMarket(){
+        if(market == null){
+            market = new StockMarket();
+        }
+        return market;
+    }
+
 
     public double getPriceOf(String name) {
         LocalDate currentDate = java.time.LocalDate.now();

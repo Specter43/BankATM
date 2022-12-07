@@ -17,23 +17,23 @@ public class AccountSecurity extends Account {
     private HashMap<String, Double>spending;
 
     public void buy(HoldingStock stock) {
-        int cost = stock.getPrice() * numBuy ;
+        double cost = stock.getBuyInPrice() * stock.getShares();
         if(deposit - cost < minimumDeposit ){
             throw new RuntimeException("Cannot decrease your security deposit less than the minimum amount.");
         }
         deposit -= cost;
-        if(!openPositions.containsKey(stock.getServiceStock().getName())) {
-            openPositions.put(stock.getServiceStock().getName(),new ArrayList<>());
-            spending.put(stock.getServiceStock().getName(),0);
+        if(!openPositions.containsKey(stock.getStock().getName())) {
+            openPositions.put(stock.getStock().getName(),new ArrayList<>());
+            spending.put(stock.getStock().getName(),0.0);
         }
-        openPositions.get(stock.getServiceStock().getName()).add(stock);
-        spending.put(stock.getServiceStock().getName(),spending.get(stock.getName()) + cost);
+        openPositions.get(stock.getStock().getName()).add(stock);
+        spending.put(stock.getStock().getName(),spending.get(stock.getStock().getName()) + cost);
     }
 
     public double getUnrealizedProfit(){
         double unrealizedProfit = 0;
         for(Map.Entry<String,ArrayList<HoldingStock>> e : openPositions.entrySet()){
-            double currentPrice = StockMarketService.getPriceOf(e.getKey());
+            double currentPrice = StockMarket.getMarket().getPriceOf(e.getKey());
             for(HoldingStock hs : e.getValue()){
               unrealizedProfit+=   (currentPrice - hs.getBuyInPrice()) * hs.getShares() ;
             }
@@ -92,11 +92,10 @@ public class AccountSecurity extends Account {
             throw new RuntimeException("Cannot sell more than you have.");
         }
 
-        int  income = StockMarket.getCurrentPrice(stockName) * numSell;
+        double income = StockMarket.getMarket().getPriceOf(stockName) * numSell;
 
         sellFIFO(stockName,numSell);
-
-
+        realizedProfit += income;
     }
 
 }

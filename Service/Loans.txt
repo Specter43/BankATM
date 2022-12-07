@@ -1,0 +1,1 @@
+debtor/amount/dueDate/duePeriod/interestRate

@@ -14,7 +14,7 @@ public class AccountSecurity extends Account {
 
     private double realizedProfit = 0;
 
-    private HanhMap<String, Double>spending;
+    private HashMap<String, Double>spending;
 
     public void buy(HoldingStock stock) {
         int cost = stock.getPrice() * numBuy ;

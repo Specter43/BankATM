@@ -1,3 +1,5 @@
+import Service.Stock;
+
 /**
  * HoldingStock is the stock that a customer gets when he buys a stock
  * from the stock market.
@@ -8,16 +10,16 @@
  */
 
 public class HoldingStock {
-    private ServiceStock serviceStock;
+    private Stock stock;
     private int shares;
     private double buyInPrice;
 
-    public ServiceStock getServiceStock() {
-        return serviceStock;
+    public Stock getStock() {
+        return stock;
     }
 
-    public void setServiceStock(ServiceStock serviceStock) {
-        this.serviceStock = serviceStock;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public int getShares() {

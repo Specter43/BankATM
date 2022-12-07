@@ -1,9 +1,9 @@
 package Bank;
 
-import Personnel.PersonnelCustomer;
+import Personnel.Customer;
 
 import java.util.ArrayList;
 
 public class Bank {
-    private ArrayList<PersonnelCustomer> allCustomers;
+    private ArrayList<Customer> allCustomers;
 }

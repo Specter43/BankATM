@@ -1,10 +1,11 @@
 package Personnel;
 
+import Service.StockMarket;
+
 import java.util.ArrayList;
-import Service.StockMarketService;
 
 public class Manager extends Personnel {
-    private StockMarketService stockMarketService;
+    private StockMarket stockMarket;
     private ArrayList<Customer> allCustomers;
 
     public void checkSpecificCustomer() {

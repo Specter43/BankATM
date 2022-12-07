@@ -34,4 +34,15 @@ public class StockMarket extends Service {
     public HashMap<LocalDate, List<Stock>> getStocks() {
         return stocks;
     }
+
+    public double getPriceOf(String name) {
+        LocalDate currentDate = java.time.LocalDate.now();
+        List<Stock> todayStocks = stocks.get(currentDate);
+        for (Stock stock : todayStocks) {
+            if (stock.getName().equals(name)) {
+                return stock.getPrice();
+            }
+        }
+        return 0.0;
+    }
 }

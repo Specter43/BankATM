@@ -8,6 +8,7 @@ import Account.AccountSecurity;
  * This class is a factory that generates checking account, saving account, and security account.
  */
 public class AccountFactory {
+    private int accountID = 0;
 
     /**
      * Constructor
@@ -21,7 +22,8 @@ public class AccountFactory {
      * @return AccountChecking: a checking account
      */
     public AccountChecking generateCheckingAccount(){
-        return null;
+        AccountChecking checkingAccount = new AccountChecking();
+        return checkingAccount;
     }
 
     /**

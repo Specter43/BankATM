@@ -13,4 +13,5 @@ public abstract class Account {
     public void setBalance(Balance balance) {
         this.balance = balance;
     }
+
 }

@@ -11,7 +11,6 @@ public class CurrencyRMB extends Currency {
      * It sets the value of the CurrencyRMB to 0
      */
     public CurrencyRMB() {
-        super.setCurrencyName("RMB");
         super.setAmount(0);
     }
 
@@ -21,7 +20,6 @@ public class CurrencyRMB extends Currency {
      * @param amount the worthy value of this CurrencyRMB
      */
     public CurrencyRMB(double amount){
-        super.setCurrencyName("RMB");
         super.setAmount(amount);
     }
 }

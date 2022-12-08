@@ -4,13 +4,11 @@ package Currency;
  * CurrencyUSD represents the USD currency, and it extends from the Currency abstract class.
  */
 public class CurrencyUSD extends Currency {
-
     /**
      * The empty Constructor
      * It sets the value of the CurrencyUSD to 0
      */
     public CurrencyUSD() {
-        super.setCurrencyName("USD");
         super.setAmount(0);
     }
 
@@ -19,7 +17,6 @@ public class CurrencyUSD extends Currency {
      * @param amount the worthy value of this CurrencyUSD
      */
     public CurrencyUSD(double amount){
-        super.setCurrencyName("USD");
         super.setAmount(amount);
     }
 }

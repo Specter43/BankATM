@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileOperator {
+
+    public FileOperator() {
+    }
+
     public HashMap<String, List<String>> readFile(String fileName) {
         HashMap<String, List<String>> data = new HashMap<>();
         try {

@@ -10,7 +10,6 @@ public class CurrencyEURO extends Currency {
      * It sets the value of the CurrencyEURO to 0
      */
     public CurrencyEURO() {
-        super.setCurrencyName("EURO");
         super.setAmount(0);
     }
 
@@ -19,7 +18,6 @@ public class CurrencyEURO extends Currency {
      * @param amount the worthy value of this CurrencyEURO
      */
     public CurrencyEURO(double amount){
-        super.setCurrencyName("EURO");
         super.setAmount(amount);
     }
 }

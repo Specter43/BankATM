@@ -3,23 +3,43 @@ package Views;
 import Account.Account;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrameATM extends JFrame {
     private JFrame frame;
     private Account currentAccount;
     private boolean isManager;
+    private JLabel welcomeLabel;
+    private JTextField usernameTextField;
+    private JPasswordField PINPasswordField;
+    private JButton logInButton;
+    private JPanel mainPanel;
+    private JButton signUpButton;
 
     public FrameATM() {
-        frame = new JFrame();
-        frame.setTitle("Bank ATM");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setSize(600, 600);
-        frame.setVisible(true);
+        createWindow();
+        logInButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("FUCK");
+            }
+        });
+        signUpButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("SHIT");
+            }
+        });
+    }
 
-        ImageIcon image = new ImageIcon("logo.png");
-        frame.setIconImage(image.getImage());
-        frame.getContentPane().setBackground(new Color(204, 0, 0));
+    private void createWindow() {
+        setContentPane(mainPanel);
+        setTitle("BANK ATM");
+        setSize(600, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 }

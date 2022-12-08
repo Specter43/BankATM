@@ -12,7 +12,7 @@ public class StockMarket extends Service {
     static private StockMarket market;
     private HashMap<LocalDate, List<Stock>> stocks;
 
-    private StockMarket() {
+    public StockMarket() {
         initializeStockMarket();
     }
 

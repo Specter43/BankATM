@@ -16,7 +16,7 @@ public class Manager extends Personnel {
         this.allCustomers = allCustomers;
     }
 
-    public void checkSpecificCustomer() {
+    public void checkSpecificCustomer(String name) {
 
     }
     public void checkAllCustomers() {}

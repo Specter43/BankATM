@@ -1,1 +1,1 @@
-accID/usdBalance/euroBalance/rmbBalance
+accID/BalanceUSD/BalanceEURO/BalanceRMB

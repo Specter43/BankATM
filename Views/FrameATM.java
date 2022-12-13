@@ -23,7 +23,8 @@ public class FrameATM extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("FUCK");
+                ManagerInfoWindow managerInfoWindow = new ManagerInfoWindow();
+                setVisible(false);
             }
         });
         signUpButton.addMouseListener(new MouseAdapter() {

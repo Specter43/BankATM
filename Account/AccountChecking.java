@@ -17,5 +17,7 @@ public class AccountChecking extends Account {
     }
 
 
-    public void withdrawal() {}
+    public void withdrawal(String currencyType , double amount) throws  RuntimeException {
+        getBalance().takeMoney(currencyType,amount);
+    }
 }

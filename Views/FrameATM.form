@@ -30,6 +30,8 @@
           <gridbag top="0" left="0" bottom="0" right="100" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-12828863"/>
+          <foreground color="-1"/>
           <text value="Sign up"/>
         </properties>
       </component>
@@ -39,6 +41,8 @@
           <gridbag top="0" left="100" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <background color="-12828863"/>
+          <foreground color="-1"/>
           <text value="Log in"/>
         </properties>
       </component>

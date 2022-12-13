@@ -5,16 +5,15 @@ import Personnel.Customer;
 public class Loan extends Service {
     private double amount;
     private double interestRate;
-    private Customer debtor;
-    private double duePeriodAmount;
+    private Customer debtorID;
 
-    public Loan(double amount, double interestRate, Customer debtor) {
+    public Loan(double amount, double interestRate, Customer debtorID) {
         this.amount = amount;
         this.interestRate = interestRate;
-        this.debtor = debtor;
+        this.debtorID = debtorID;
     }
 
-    public void chargePayment() {
+    public void payLoan() {
 
     }
 }

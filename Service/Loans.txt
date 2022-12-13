@@ -1,1 +1,4 @@
-debtor/amount/dueDate/duePeriod/interestRate
+debtorID/amount/interestRate
+1 100 0.08
+2 1000 0.06
+3 500 0.07

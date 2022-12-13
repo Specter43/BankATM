@@ -6,61 +6,152 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class ButtonList extends JPanel {
+
+    Color color;
     int lineCount = 0;
+    int width,height;
+    static int buttonsPerLine = 3;
+
+    JScrollPane scrollableList;
     ArrayList <LinkedHashMap<String,JLabel>> infos = new ArrayList<>();
     ArrayList<JPanel>infoLines = new ArrayList<>();
     ArrayList<LinkedHashMap<String,JButton>> actions = new ArrayList<>();
     ArrayList<JPanel>actionLines= new ArrayList<>();
+    private ArrayList<Integer> filters = new ArrayList<>();
 
-    public ButtonList() {
-        this.setSize(800,600);
-        this.setVisible(true);
-
+    public ButtonList(int width, int height,Color color) {
+        this.color = color;
+        this.width = width;
+        this.height = height;
+        this.setSize(width,height);
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
 
-    public void populateLayout(int lineCount, ArrayList<String> sections , ArrayList<String> buttons){
+    public void populateLayout(int lineHeight,int unitWidth, int lineCount, ArrayList<String> sections , ArrayList<String> buttons){
+        int maxLength = 0;
+        for(String s:buttons){
+            if(s.length() > maxLength)maxLength = s.length();
+        }
+        JPanel labelTop = new JPanel();
+        labelTop.setMaximumSize(new Dimension(width,100));
+        labelTop.setLayout(new BoxLayout(labelTop,BoxLayout.X_AXIS));
+        for(String s:sections){
+            JLabel   label=  new JLabel(s);
+            label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
+            label.setAlignmentX(LEFT_ALIGNMENT);
+            label.setAlignmentY(TOP_ALIGNMENT);
+            //label.setVisible(true);
+            labelTop.add(label);
+        }
+        JLabel   actionLabel=  new JLabel("Actions");
+        actionLabel.setMinimumSize(new Dimension(  width/ 2 ,lineHeight));
+        labelTop.add(actionLabel);
+        this.add(labelTop);
 
-        this.setLayout(new GridLayout(lineCount,2));
+
         this.lineCount= lineCount;
         for(int i = 0 ; i < lineCount; i++){
 
             LinkedHashMap<String,JLabel> infoLineSections =  new LinkedHashMap<>();
-            JPanel labelLine = new JPanel(new GridLayout());
+            JPanel labelLine = new JPanel();
+            labelLine.setLayout(new GridLayout());
+            labelLine.setBackground(color);
+            //labelLine.setPreferredSize(new Dimension(maxLength * sections.size(),lineHeight));
+            labelLine.setMinimumSize(new Dimension(width/ 2,100));
             for(String s: sections){
                 JLabel   label=  new JLabel(s);
+                label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
+                label.setAlignmentX(LEFT_ALIGNMENT);
+                label.setAlignmentY(TOP_ALIGNMENT);
+                //label.setVisible(true);
                 labelLine.add(label);
-                infoLineSections.put(s,label);
+                infoLineSections.put(s,label);//hashmap for accessing the String field of the line
             }
             infoLines.add(labelLine);
             infos.add(infoLineSections);
 
             LinkedHashMap<String,JButton> buttonLineSections=  new LinkedHashMap<>();
-            JPanel buttonLine= new JPanel(new GridLayout());
+            JPanel buttonLine= new JPanel();
+
+            //buttonLine.setLayout(new BoxLayout(buttonLine,BoxLayout.X_AXIS));
+            for(String s:buttons){
+                if(s.length() > maxLength)maxLength = s.length();
+            }
+            //buttonLine.setPreferredSize(new Dimension(maxLength* buttons.size(),lineHeight));
+            buttonLine.setMinimumSize(new Dimension(width/ 2,100));
+            //buttonLine.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            buttonLine.setLayout(new GridLayout(-1,3));
+            buttonLine.setBackground(color);
+            buttonLine.setAlignmentX(Component.CENTER_ALIGNMENT);
+            buttonLine.setAlignmentY(Component.CENTER_ALIGNMENT);
             for(String s: buttons){
                 JButton button  = new JButton(s);
+                button.setMaximumSize(new Dimension( width/2/ buttonsPerLine,lineHeight));
+                button.setContentAreaFilled(false);
+                button.setOpaque(false);
+                button.setBackground(color);
+                button.setHorizontalAlignment(SwingConstants.CENTER);
+                button.setVerticalAlignment(SwingConstants.NORTH);
+                //button.setVisible(true);
                 buttonLine.add(button);
                 buttonLineSections.put(s,button);
+                //hashmap for accessing the String field of the line
             }
             actionLines.add(buttonLine);
+            //buttonLine.setVisible(true);
             actions.add(buttonLineSections);
         }
-        for(int i = 0 ; i < lineCount; i++){
-            this.getLayout().addLayoutComponent("info", infoLines.get(i));
-            this.getLayout().addLayoutComponent( "action",actionLines.get(i));
+        updateLines();
+
+    }
+    public void updateLines(){
+
+        this.setSize(width,height);
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        for( Component c : this.getComponents()){
+            if(c instanceof  JScrollPane)this.remove(c);
         }
+
+        JPanel leftAndRight = new JPanel();
+        leftAndRight.setLayout(new BoxLayout(leftAndRight,  BoxLayout.X_AXIS));
+        leftAndRight.setBounds(0,0,width ,height);
+        leftAndRight.setMinimumSize(new Dimension( width,height));
+        scrollableList  = new JScrollPane();
+        scrollableList.setBackground(color);
+        this.add(scrollableList);
+        scrollableList.setViewportView(leftAndRight);
+        scrollableList.setPreferredSize(new Dimension(width,height));
+        //setting left and right
+        JPanel left= new JPanel();
+        left.setLayout(new BoxLayout(left  ,BoxLayout.Y_AXIS));
+        left.setMinimumSize(new Dimension(width/2,height));
+        //left.setLayout(new FlowLayout());
+        leftAndRight.add(left,0);
+        JPanel right  = new JPanel();
+        right.setLayout(new BoxLayout(right,BoxLayout.Y_AXIS));
+        right.setMinimumSize(new Dimension(width/2,height));
+        //right.setLayout(new FlowLayout());
+        leftAndRight.add(right,1);
+
+        leftAndRight.setBackground(color);
+        //this.setForeground(color);
+        for(int i = 0 ; i < lineCount; i++){//from left to right from up to down
+            if(filters.contains(i))continue;;
+            left.add(infoLines.get(i));
+            right.add(actionLines.get(i));
+            //this.getLayout().addLayoutComponent("info", infoLines.get(i));
+            //this.getLayout().addLayoutComponent( "action",actionLines.get(i));
+        }
+        revalidate();
+        repaint();
     }
 
     //public void addLine(){
     //
     //}
 
-    @Override
-    public void repaint() {
-        this.setLayout(new GridLayout(1,2));
-        for(int i = 0 ; i < lineCount; i++){
-            this.getLayout().addLayoutComponent("info", infoLines.get(i));
-            this.getLayout().addLayoutComponent( "action",actionLines.get(i));
-        }
+    public void updateFilterIndices(ArrayList<Integer> filters){
+       this.filters = filters;
     }
 
     public ArrayList< LinkedHashMap<String,JLabel>>  getInfoSections(){

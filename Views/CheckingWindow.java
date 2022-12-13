@@ -28,14 +28,17 @@ public class CheckingWindow extends JFrame {
     public CheckingWindow(Customer operator,Account detail){
         this.operator = operator;
         this.detail = detail;
-        ButtonList content =  new ButtonList();
+        ButtonList content =  new ButtonList(800,600,defaultColor);
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        sections.add("people");
+        sections.add("Account#");
+        sections.add("Account Type");
+        sections.add("Balance");
         buttons.add("transfer");
-        content.populateLayout(1,sections,buttons);
-        content.setBackground(defaultColor);
+        content.populateLayout(100,10,100,sections,buttons);
+        //content.setBackground(defaultColor);
         setContentPane(content);
+        //content.add(new Button("hello"));
         setTitle("Checking Window");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,9 +62,6 @@ public class CheckingWindow extends JFrame {
             throw new RuntimeException( "No Screens Found" );
         }
     }
-    public ButtonList getCustomeLayout(){
-        return new ButtonList();
-    }
 
     public CheckingWindow(Customer subject, Manager operator,Account detail){
         this.operator = operator;
@@ -69,8 +69,7 @@ public class CheckingWindow extends JFrame {
     }
 
 
-
-
-
-
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }

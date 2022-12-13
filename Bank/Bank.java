@@ -1,11 +1,16 @@
 package Bank;
 
+import Input.FileOperator;
 import Personnel.Customer;
 import Personnel.Manager;
 import Service.StockMarket;
 import Views.FrameATM;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Bank {
     ArrayList<Customer> getAllCustomers;
@@ -20,7 +25,14 @@ public class Bank {
      * @return true if identity matches, false if not.
      */
     public boolean login(String userName, String pin){
-        return true;
+        FileOperator fileOperator = new FileOperator();
+        HashMap<String, List<String>> output = fileOperator.readFile("Personnel/Personnels.txt");
+        for(int i = 0; i<output.get("name").size(); i++){
+            if(output.get("name").get(i).equals(userName)){
+                return output.get("PIN").get(i).equals(pin);
+            }
+        }
+        return false;
     }
 
 
@@ -32,10 +44,26 @@ public class Bank {
      * it will return true.
      * @return true/false
      */
-    public boolean singUp(){
-        String userName;
-        //check if the userName is in the txt file. If it is in, then return false. If not, keep going.
-        String pin;
-        return true;
+    public boolean signUp(String userName, String pin){
+        if(pin.trim().equals("")){ //if the pin is empty, return false
+            return false;
+        }
+        FileOperator fileOperator = new FileOperator();
+        HashMap<String, List<String>> output = fileOperator.readFile("Personnel/Personnels.txt");
+        if(output.get("name").contains(userName)){
+            return false; //If the username already exist, return false.
+        }
+        try{
+            FileWriter fw = new FileWriter("Personnel/Personnels.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            int id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
+            bw.write("\n"+id+" "+userName+" "+pin+" "+"abced");
+            bw.close();
+            System.out.println("Finished writing");
+            return true;
+        }catch (Throwable e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

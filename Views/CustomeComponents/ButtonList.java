@@ -29,7 +29,7 @@ public class ButtonList extends JPanel {
 
     public void initLayout(int lineHeight, int unitWidth, ArrayList<String> sections , ArrayList<String> buttons){
         JPanel labelTop = new JPanel();
-        labelTop.setMaximumSize(new Dimension(width,100));
+        labelTop.setMaximumSize(new Dimension(width,lineHeight));
         labelTop.setLayout(new BoxLayout(labelTop,BoxLayout.X_AXIS));
         for(String s:sections){
             JLabel   label=  new JLabel(s);

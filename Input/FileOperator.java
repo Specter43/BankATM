@@ -42,7 +42,7 @@ public class FileOperator {
             myReader.close();
             return data;
         } catch (Exception e) {
-            System.out.printf("%s not found.\n", fileName);
+            System.out.printf(e.toString());
         }
         return data;
     }

@@ -27,11 +27,7 @@ public class ButtonList extends JPanel {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
 
-    public void populateLayout(int lineHeight,int unitWidth, int lineCount, ArrayList<String> sections , ArrayList<String> buttons){
-        int maxLength = 0;
-        for(String s:buttons){
-            if(s.length() > maxLength)maxLength = s.length();
-        }
+    public void initLayout(int lineHeight, int unitWidth, ArrayList<String> sections , ArrayList<String> buttons){
         JPanel labelTop = new JPanel();
         labelTop.setMaximumSize(new Dimension(width,100));
         labelTop.setLayout(new BoxLayout(labelTop,BoxLayout.X_AXIS));
@@ -49,61 +45,74 @@ public class ButtonList extends JPanel {
         this.add(labelTop);
 
 
-        this.lineCount= lineCount;
-        for(int i = 0 ; i < lineCount; i++){
-
-            LinkedHashMap<String,JLabel> infoLineSections =  new LinkedHashMap<>();
-            JPanel labelLine = new JPanel();
-            labelLine.setLayout(new GridLayout());
-            labelLine.setBackground(color);
-            //labelLine.setPreferredSize(new Dimension(maxLength * sections.size(),lineHeight));
-            labelLine.setMinimumSize(new Dimension(width/ 2,100));
-            for(String s: sections){
-                JLabel   label=  new JLabel(s);
-                label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
-                label.setAlignmentX(LEFT_ALIGNMENT);
-                label.setAlignmentY(TOP_ALIGNMENT);
-                //label.setVisible(true);
-                labelLine.add(label);
-                infoLineSections.put(s,label);//hashmap for accessing the String field of the line
-            }
-            infoLines.add(labelLine);
-            infos.add(infoLineSections);
-
-            LinkedHashMap<String,JButton> buttonLineSections=  new LinkedHashMap<>();
-            JPanel buttonLine= new JPanel();
-
-            //buttonLine.setLayout(new BoxLayout(buttonLine,BoxLayout.X_AXIS));
-            for(String s:buttons){
-                if(s.length() > maxLength)maxLength = s.length();
-            }
-            //buttonLine.setPreferredSize(new Dimension(maxLength* buttons.size(),lineHeight));
-            buttonLine.setMinimumSize(new Dimension(width/ 2,100));
-            //buttonLine.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            buttonLine.setLayout(new GridLayout(-1,3));
-            buttonLine.setBackground(color);
-            buttonLine.setAlignmentX(Component.CENTER_ALIGNMENT);
-            buttonLine.setAlignmentY(Component.CENTER_ALIGNMENT);
-            for(String s: buttons){
-                JButton button  = new JButton(s);
-                button.setMaximumSize(new Dimension( width/2/ buttonsPerLine,lineHeight));
-                button.setContentAreaFilled(false);
-                button.setOpaque(false);
-                button.setBackground(color);
-                button.setHorizontalAlignment(SwingConstants.CENTER);
-                button.setVerticalAlignment(SwingConstants.NORTH);
-                //button.setVisible(true);
-                buttonLine.add(button);
-                buttonLineSections.put(s,button);
-                //hashmap for accessing the String field of the line
-            }
-            actionLines.add(buttonLine);
-            //buttonLine.setVisible(true);
-            actions.add(buttonLineSections);
-        }
         updateLines();
 
     }
+
+    public void removeLine(int i ){
+        lineCount--;
+        infoLines.remove(i);
+        infos.remove(i);
+        actionLines.remove(i);
+        //buttonLine.setVisible(true);
+        actions.remove(i);
+
+    }
+
+    public void addOneLine(int lineHeight,int unitWidth, int lineCount, ArrayList<String> sections , ArrayList<String> buttons){
+        this.lineCount++;
+        LinkedHashMap<String,JLabel> infoLineSections =  new LinkedHashMap<>();
+        JPanel labelLine = new JPanel();
+        labelLine.setLayout(new BoxLayout(labelLine,BoxLayout.X_AXIS));
+        //labelLine.setLayout(new GridLayout());
+        labelLine.setBackground(color);
+        //labelLine.setPreferredSize(new Dimension(maxLength * sections.size(),lineHeight));
+        labelLine.setMinimumSize(new Dimension(width/ 2,lineHeight));
+        labelLine.setPreferredSize(new Dimension(width/2,lineHeight));
+        for(String s: sections){
+            JLabel   label=  new JLabel(s);
+            label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
+            label.setAlignmentX(LEFT_ALIGNMENT);
+            label.setAlignmentY(TOP_ALIGNMENT);
+            //label.setVisible(true);
+            labelLine.add(label);
+            infoLineSections.put(s,label);//hashmap for accessing the String field of the line
+        }
+        infoLines.add(labelLine);
+        infos.add(infoLineSections);
+
+
+        LinkedHashMap<String,JButton> buttonLineSections=  new LinkedHashMap<>();
+        JPanel buttonLine= new JPanel();
+
+        //buttonLine.setLayout(new BoxLayout(buttonLine,BoxLayout.X_AXIS));
+        //buttonLine.setPreferredSize(new Dimension(maxLength* buttons.size(),lineHeight));
+        buttonLine.setMinimumSize(new Dimension(width/ 2,50));
+        //buttonLine.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        //buttonLine.setLayout(new GridLayout(-1,3));
+        buttonLine.setLayout(new BoxLayout(buttonLine,BoxLayout.X_AXIS));
+        buttonLine.setBackground(color);
+        buttonLine.setAlignmentX(Component.CENTER_ALIGNMENT);
+        buttonLine.setAlignmentY(Component.CENTER_ALIGNMENT);
+        for(String s: buttons){
+            JButton button  = new JButton(s);
+            button.setMaximumSize(new Dimension( width/2/ buttonsPerLine,lineHeight));
+            button.setContentAreaFilled(false);
+            button.setOpaque(false);
+            button.setBackground(color);
+            button.setHorizontalAlignment(SwingConstants.CENTER);
+            button.setVerticalAlignment(SwingConstants.NORTH);
+            //button.setVisible(true);
+            buttonLine.add(button);
+            buttonLineSections.put(s,button);
+            //hashmap for accessing the String field of the line
+        }
+        actionLines.add(buttonLine);
+        //buttonLine.setVisible(true);
+        actions.add(buttonLineSections);
+        updateLines();
+    }
+
     public void updateLines(){
 
         this.setSize(width,height);

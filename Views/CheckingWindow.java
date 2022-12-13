@@ -35,7 +35,16 @@ public class CheckingWindow extends JFrame {
         sections.add("Account Type");
         sections.add("Balance");
         buttons.add("transfer");
-        content.populateLayout(100,10,100,sections,buttons);
+        buttons.add("transfer");
+        buttons.add("transfer");
+        buttons.add("transfer");
+        buttons.add("transfer");
+        buttons.add("transfer");
+        content.initLayout(100,10,sections,buttons);
+        content.addOneLine(100,10,1,sections,buttons);
+        content.addOneLine(100,10,1,sections,buttons);
+        content.addOneLine(100,10,1,sections,buttons);
+        content.addOneLine(100,10,1,sections,buttons);
         //content.setBackground(defaultColor);
         setContentPane(content);
         //content.add(new Button("hello"));

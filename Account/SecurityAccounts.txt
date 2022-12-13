@@ -1,2 +1,2 @@
-accID/BalanceUSD/HoldingStocks
-001 2500 [{"APPL", "100", "149.10"}, {"MSFT", "100", "250.0"}]
+personnelID/accID/BalanceUSD/HoldingStocks
+1 1 2500 [{"APPL", "100", "149.10"}, {"MSFT", "100", "250.0"}]

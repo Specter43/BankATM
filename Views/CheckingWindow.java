@@ -15,13 +15,13 @@ public class CheckingWindow extends JFrame {
 
     Personnel operator;
     Account detail;
-    private JPanel panel1;
-    private JLabel name;
-    private JPanel LeftFields;
-    private JPanel RightFields;
-    private JButton transferButton;
-    private JTextField accountBalance;
-    private JButton withDrawButton;
+    private JPanel basePanel;
+    private JPanel WestPanel;
+    private JPanel NorthPanel;
+    private JPanel EastPanel;
+    private JPanel SouthPanel;
+    private JButton button1;
+    private JTextField textField1;
 
     private JTextField balance;
 
@@ -56,7 +56,7 @@ public class CheckingWindow extends JFrame {
 
 
     private void createUIComponents() {
-        ButtonList content =  new ButtonList(800,600,defaultColor);
+        ButtonList content =  new ButtonList(800,200,defaultColor);
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         sections.add("Account#");
@@ -67,13 +67,15 @@ public class CheckingWindow extends JFrame {
         buttons.add("transfer");
         content.initLayout(50,10,sections,buttons);
         content.addOneLine(50,10,1,sections,buttons);
-        content.addOneLine(50,10,1,sections,buttons);
-        content.addOneLine(50,10,1,sections,buttons);
-        content.addOneLine(50,10,1,sections,buttons);
-        content.addOneLine(50,10,1,sections,buttons);
+
+        //NorthPanel.setPreferredSize(new Dimension(0,100));
+        textField1.setPreferredSize(new Dimension(100,50));
+        basePanel.add(content,BorderLayout.CENTER);
+
+
         //content.getInfoSections().get
         //content.setBackground(defaultColor);
-        setContentPane(content);
+        setContentPane(basePanel);
         //content.add(new Button("hello"));
         setTitle("Checking Window");
         setSize(800, 600);

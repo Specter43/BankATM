@@ -10,11 +10,19 @@ public class AccountChecking extends Account {
     private CurrencyEURO euroBalance;
     private CurrencyRMB rmbBalance;
 
+    public String ID;
+
     public AccountChecking() {
         usdBalance = new CurrencyUSD(0);
         euroBalance = new CurrencyEURO(0);
         rmbBalance = new CurrencyRMB(0);
     }
+
+    public void setID(String  id){
+        ID = id;
+    }
+
+
 
 
     public void withdrawal(String currencyType , double amount) throws  RuntimeException {

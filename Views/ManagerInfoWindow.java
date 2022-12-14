@@ -36,25 +36,26 @@ public class ManagerInfoWindow extends JFrame {
         });
 
         setVisible(true);
+        JFrame current = this;
         checkSpecificCustomerButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Specific", customerNameTextField.getText());
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current,"Specific", customerNameTextField.getText());
             }
         });
         checkAllCustomersButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("All", "");
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current,"All", "");
             }
         });
         checkPoorCustomersButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Poor", "");
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current, "Poor", "");
             }
         });
         getDailyReportButton.addMouseListener(new MouseAdapter() {

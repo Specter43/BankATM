@@ -4,6 +4,8 @@ import Personnel.*;
 
 import javax.swing.*;
 import Account.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import Views.CustomeComponents.ButtonList;
 
 import java.awt.*;
@@ -20,11 +22,8 @@ public class CheckingWindow extends JFrame {
     private JPanel NorthPanel;
     private JPanel EastPanel;
     private JPanel SouthPanel;
-    private JButton clearButton;
-    private JTextField textField1;
     private JButton exitButton;
 
-    private JTextField balance;
 
     private  ButtonList content;
 
@@ -58,25 +57,14 @@ public class CheckingWindow extends JFrame {
 
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        if(operator instanceof  Customer){
-            sections.add("Account#");
-            sections.add("BalanceUSD");
-            sections.add("BalanceEURO");
-            sections.add("BalanceRMB");
-            buttons.add("deposit");
-            buttons.add("withdrawal");
-            buttons.add("transfer");
-        }else if(operator instanceof  Manager){
-            sections.add("Account#");
-            sections.add("BalanceUSD");
-            sections.add("BalanceEURO");
-            sections.add("BalanceRMB");
-        }else{return ;}
+        sections.add("Account#");
+        sections.add("BalanceUSD");
+        sections.add("BalanceEURO");
+        sections.add("BalanceRMB");
         content.initLayout(50,10,sections,buttons);
         content.addOneLine(50,10,1,sections,buttons);
 
         //NorthPanel.setPreferredSize(new Dimension(0,100));
-        textField1.setPreferredSize(new Dimension(100,50));
         basePanel.add(content,BorderLayout.CENTER);
         updateAccountInfoDisplay();
 

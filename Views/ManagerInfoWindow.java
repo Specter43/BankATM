@@ -36,11 +36,12 @@ public class ManagerInfoWindow extends JFrame {
         });
 
         setVisible(true);
+        JFrame current = this;
         checkSpecificCustomerButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Specific", "");
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current,"Specific", "");
             }
         });
     }

@@ -18,10 +18,6 @@ public class AccountChecking extends Account {
         rmbBalance = new CurrencyRMB(rmb);
     }
 
-    public double getUSDBalance(){return usdBalance.getAmount();}
-    public double getEUROBalance(){return euroBalance.getAmount();}
-    public double getRMBBalance(){return rmbBalance.getAmount();}
-
 
 
 

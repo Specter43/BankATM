@@ -9,13 +9,6 @@ public class AccountSaving extends Account {
         super(ID);
     }
 
-    public void deposit(double amount){
-        balance.addUSDBalance(amount);
-    }
-
-    public double getUSDBalance(){
-         return balance.getUSDBalance();
-    }
 
 
     public boolean canUseSecurity(){

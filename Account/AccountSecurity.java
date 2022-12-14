@@ -20,8 +20,24 @@ public class AccountSecurity extends Account {
         super(ID);
     }
 
-    public double getBalanceUSD(){
-        return getBalance().getUSDBalance();
+    @Override
+    public double getEUROBalance() {
+        return 0.0;
+    }
+
+    @Override
+    public double getRMBBalance() {
+        return 0.0;
+    }
+
+    @Override
+    public void depositEURO(double amount) {
+        return;
+    }
+
+    @Override
+    public void depositRMB(double amount) {
+       return;
     }
 
     public void buy(HoldingStock stock) {

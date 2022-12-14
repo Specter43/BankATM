@@ -2,6 +2,8 @@ package Views;
 
 import Account.*;
 import Personnel.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
@@ -23,50 +25,49 @@ public class SavingWindow extends JFrame{
     private JPanel WestPanel;
     private JPanel SouthPanel;
     private JTextField textField1;
-    private JButton clearButton;
-    private JButton addAssetButton;
     private JPanel CenterPanel;
     private JButton exitButton;
 
-    public SavingWindow(Personnel operator, AccountSaving detail){
+    private JFrame previous;
+
+
+    public SavingWindow(JFrame previous, Personnel operator, AccountSaving detail){
+        previous.setVisible(false);
+        this.previous = previous;
         this.operator = operator;
         this.detail = detail;
         createUIComponents();
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                previous.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
+
+
 
     private void createUIComponents() {
         loanList =  new ButtonList(800,200,defaultColor);
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         CenterPanel.setLayout(new GridLayout(2,1));
-        if(operator instanceof  Customer){
-            sections.add("Loan");
-            sections.add("Amount Owed");
-            buttons.add("Pay");
-        }else if(operator instanceof  Manager){
-            sections.add("Loan");
-            sections.add("Amount Owed");
-            //buttons.add("Pay");
-        }else{return ;}
+        sections.add("Loan");
+        sections.add("Amount Owed");
         loanList.initLayout(50,10,sections,buttons);
         loanList.addOneLine(50,10,1,sections,buttons);
 
         //NorthPanel.setPreferredSize(new Dimension(0,100));
-        textField1.setPreferredSize(new Dimension(100,50));
         CenterPanel.add(loanList);
 
         accountInfo=  new ButtonList(800,200,defaultColor);
         ArrayList<String> accountSections = new ArrayList<>();
         ArrayList<String> accountButtons= new ArrayList<>();
-        if(operator instanceof  Customer){
-            accountSections.add("Account");
-            accountSections.add("BalanceUSD");
-            accountButtons.add("AddBalance");
-        }else if(operator instanceof  Manager){
-            accountSections.add("Account");
-            accountSections.add("BalanceUSD");
-            //buttons.add("Pay");
-        }else{return ;}
+        accountSections.add("Account");
+        accountSections.add("BalanceUSD");
+        //buttons.add("Pay");
         accountInfo.initLayout(50,10,accountSections,accountButtons);
         accountInfo.addOneLine(50,10,1,accountSections,accountButtons);
         CenterPanel.add(accountInfo);
@@ -79,7 +80,7 @@ public class SavingWindow extends JFrame{
         setTitle("Saving Window");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        this.setVisible(true);
     }
 
     public void updateAccountInfoDisplay(){

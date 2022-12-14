@@ -2,6 +2,8 @@ package Views;
 
 import Account.*;
 import Personnel.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
@@ -22,9 +24,6 @@ public class SecurityWindow extends  JFrame{
     private JPanel NorthPanel;
     private JPanel EastPanel;
     private JPanel SouthPanel;
-    private JTextField textField1;
-    private JButton Clear;
-    private JButton purchaseStockButton;
     private JButton exitButton;
     private JPanel CenterPanel;
 
@@ -39,37 +38,21 @@ public class SecurityWindow extends  JFrame{
         content =  new ButtonList(800,200,defaultColor);
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        if(operator instanceof  Customer){
-            sections.add("Stocks");
-            sections.add("Holdings");
-            buttons.add("Sell");
-        }else if(operator instanceof  Manager){
-            sections.add("Stocks");
-            sections.add("Holdings");
-        }else{return ;}
+        sections.add("Stocks");
+        sections.add("Holdings");
         content.initLayout(50,10,sections,buttons);
         content.addOneLine(50,10,1,sections,buttons);
 
         //NorthPanel.setPreferredSize(new Dimension(0,100));
-        textField1.setPreferredSize(new Dimension(100,50));
         CenterPanel.add(content,BorderLayout.CENTER);
 
         accountInfo=  new ButtonList(800,200,defaultColor);
         ArrayList<String> accountSections = new ArrayList<>();
         ArrayList<String> accountButtons= new ArrayList<>();
-        if(operator instanceof  Customer){
-            accountSections.add("Account");
-            accountSections.add("BalanceUSD");
-            accountSections.add("RealizedProfit");
-            accountSections.add("UnrealizedProfit");
-            accountButtons.add("AddBalance");
-        }else if(operator instanceof  Manager){
-            accountSections.add("Account");
-            accountSections.add("RealizedProfit");
-            accountSections.add("UnrealizedProfit");
-            accountSections.add("BalanceUSD");
-            //buttons.add("Pay");
-        }else{return ;}
+        accountSections.add("Account");
+        accountSections.add("BalanceUSD");
+        accountSections.add("RealizedProfit");
+        accountSections.add("UnrealizedProfit");
         accountInfo.initLayout(50,10,accountSections,accountButtons);
         accountInfo.addOneLine(50,10,1,accountSections,accountButtons);
         CenterPanel.add(accountInfo);
@@ -86,7 +69,7 @@ public class SecurityWindow extends  JFrame{
     }
     public void updateAccountInfoDisplay(){
         content.getInfoSections().get(0).get("Account#").setText(detail.getAccID());
-        content.getInfoSections().get(0).get("BalanceUSD").setText(Double.toString( detail.getBalanceUSD()));
+        content.getInfoSections().get(0).get("BalanceUSD").setText(Double.toString( detail.getUSDBalance()));
         content.getInfoSections().get(0).get("RealizedProfit").setText(Double.toString( detail.getRrealizedProfit()));
         content.getInfoSections().get(0).get("UnrealizedProfit").setText(Double.toString( detail.getUnrealizedProfit()));
         //content.repa

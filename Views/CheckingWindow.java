@@ -1,12 +1,13 @@
 package Views;
 
-import Account.AccountChecking;
-import Personnel.Customer;
-import Personnel.Manager;
-import Personnel.Personnel;
-import Views.CustomeComponents.ButtonList;
+import Personnel.*;
 
 import javax.swing.*;
+import Account.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import Views.CustomeComponents.ButtonList;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -21,11 +22,8 @@ public class CheckingWindow extends JFrame {
     private JPanel NorthPanel;
     private JPanel EastPanel;
     private JPanel SouthPanel;
-    private JButton clearButton;
-    private JTextField textField1;
     private JButton exitButton;
 
-    private JTextField balance;
 
     private  ButtonList content;
 
@@ -45,8 +43,8 @@ public class CheckingWindow extends JFrame {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x,
                     gd[0].getDefaultConfiguration().getBounds().y + frame.getY());
         } else if( gd.length > 0 ) {
-            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x,
-                    gd[0].getDefaultConfiguration().getBounds().y + frame.getY());
+            frame.setLocation(gd[1].getDefaultConfiguration().getBounds().x,
+                    gd[1].getDefaultConfiguration().getBounds().y + frame.getY());
         } else {
             throw new RuntimeException( "No Screens Found" );
         }
@@ -59,25 +57,14 @@ public class CheckingWindow extends JFrame {
 
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        if(operator instanceof  Customer){
-            sections.add("Account#");
-            sections.add("BalanceUSD");
-            sections.add("BalanceEURO");
-            sections.add("BalanceRMB");
-            buttons.add("deposit");
-            buttons.add("withdrawal");
-            buttons.add("transfer");
-        }else if(operator instanceof  Manager){
-            sections.add("Account#");
-            sections.add("BalanceUSD");
-            sections.add("BalanceEURO");
-            sections.add("BalanceRMB");
-        }else{return ;}
+        sections.add("Account#");
+        sections.add("BalanceUSD");
+        sections.add("BalanceEURO");
+        sections.add("BalanceRMB");
         content.initLayout(50,10,sections,buttons);
         content.addOneLine(50,10,1,sections,buttons);
 
         //NorthPanel.setPreferredSize(new Dimension(0,100));
-        textField1.setPreferredSize(new Dimension(100,50));
         basePanel.add(content,BorderLayout.CENTER);
         updateAccountInfoDisplay();
 

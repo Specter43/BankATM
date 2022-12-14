@@ -16,6 +16,14 @@ public class AccountSecurity extends Account {
 
     private HashMap<String, Double>spending;
 
+    public AccountSecurity(String ID) {
+        super(ID);
+    }
+
+    public double getBalanceUSD(){
+        return getBalance().getUSDBalance();
+    }
+
     public void buy(HoldingStock stock) {
         double cost = stock.getBuyInPrice() * stock.getShares();
         if(deposit - cost < minimumDeposit ){

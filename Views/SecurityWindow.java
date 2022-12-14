@@ -1,14 +1,95 @@
 package Views;
 
-import javax.swing.*;
+import Account.*;
+import Personnel.*;
+import Views.CustomeComponents.ButtonList;
 
-public class SecurityWindow {
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+
+public class SecurityWindow extends  JFrame{
+
+    static Color defaultColor = new Color(137,187,136);
+    Personnel operator;
+    AccountSecurity detail;
+
+    ButtonList content;
+
+    ButtonList accountInfo;
     private JPanel basePanel;
     private JPanel WestPanel;
     private JPanel NorthPanel;
     private JPanel EastPanel;
-    private JTextField textField1;
-    private JButton clearButton;
     private JPanel SouthPanel;
-    private JPanel NumberBoxPanel;
+    private JTextField textField1;
+    private JButton Clear;
+    private JButton purchaseStockButton;
+    private JButton exitButton;
+    private JPanel CenterPanel;
+
+    public SecurityWindow(Personnel operator, AccountSecurity detail){
+        this.operator = operator;
+        this.detail = detail;
+        createUIComponents();
+    }
+
+    private void createUIComponents() {
+        CenterPanel.setLayout(new GridLayout(2,1));
+        content =  new ButtonList(800,200,defaultColor);
+        ArrayList<String> sections = new ArrayList<>();
+        ArrayList<String> buttons= new ArrayList<>();
+        if(operator instanceof  Customer){
+            sections.add("Stocks");
+            sections.add("Holdings");
+            buttons.add("Sell");
+        }else if(operator instanceof  Manager){
+            sections.add("Stocks");
+            sections.add("Holdings");
+        }else{return ;}
+        content.initLayout(50,10,sections,buttons);
+        content.addOneLine(50,10,1,sections,buttons);
+
+        //NorthPanel.setPreferredSize(new Dimension(0,100));
+        textField1.setPreferredSize(new Dimension(100,50));
+        CenterPanel.add(content,BorderLayout.CENTER);
+
+        accountInfo=  new ButtonList(800,200,defaultColor);
+        ArrayList<String> accountSections = new ArrayList<>();
+        ArrayList<String> accountButtons= new ArrayList<>();
+        if(operator instanceof  Customer){
+            accountSections.add("Account");
+            accountSections.add("BalanceUSD");
+            accountSections.add("RealizedProfit");
+            accountSections.add("UnrealizedProfit");
+            accountButtons.add("AddBalance");
+        }else if(operator instanceof  Manager){
+            accountSections.add("Account");
+            accountSections.add("RealizedProfit");
+            accountSections.add("UnrealizedProfit");
+            accountSections.add("BalanceUSD");
+            //buttons.add("Pay");
+        }else{return ;}
+        accountInfo.initLayout(50,10,accountSections,accountButtons);
+        accountInfo.addOneLine(50,10,1,accountSections,accountButtons);
+        CenterPanel.add(accountInfo);
+        updateAccountInfoDisplay();
+
+        //content.getInfoSections().get
+        //content.setBackground(defaultColor);
+        setContentPane(basePanel);
+        //content.add(new Button("hello"));
+        setTitle("Security Window");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+    public void updateAccountInfoDisplay(){
+        content.getInfoSections().get(0).get("Account#").setText(detail.getAccID());
+        content.getInfoSections().get(0).get("BalanceUSD").setText(Double.toString( detail.getBalanceUSD()));
+        content.getInfoSections().get(0).get("RealizedProfit").setText(Double.toString( detail.getRrealizedProfit()));
+        content.getInfoSections().get(0).get("UnrealizedProfit").setText(Double.toString( detail.getUnrealizedProfit()));
+        //content.repa
+
+    }
 }

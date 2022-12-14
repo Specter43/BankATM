@@ -41,21 +41,21 @@ public class ManagerInfoWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current,"Specific", customerNameTextField.getText());
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow("Specific", customerNameTextField.getText());
             }
         });
         checkAllCustomersButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current,"All", "");
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow("All","" );
             }
         });
         checkPoorCustomersButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow(current, "Poor", "");
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow("Poor","" );
             }
         });
         getDailyReportButton.addMouseListener(new MouseAdapter() {

@@ -2,6 +2,11 @@ package Input;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,5 +54,12 @@ public class FileOperator {
 
     public void write(String filename) {
 
+    }
+
+    public void changeLine(String filename, int lineNumber, String data) throws IOException {
+        Path path = Paths.get(filename);
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        lines.set(lineNumber + 1, data);
+        Files.write(path, lines, StandardCharsets.UTF_8);
     }
 }

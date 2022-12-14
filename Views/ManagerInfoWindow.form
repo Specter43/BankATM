@@ -129,18 +129,6 @@
           <text value="WELCOME TO YOUR BANK! MANAGER"/>
         </properties>
       </component>
-      <component id="45c73" class="javax.swing.JButton" binding="checkAllCustomersButton">
-        <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="100" height="30"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-12828863"/>
-          <foreground color="-1"/>
-          <text value="Go"/>
-        </properties>
-      </component>
       <component id="d999d" class="javax.swing.JButton" binding="checkPoorCustomersButton">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
@@ -150,7 +138,7 @@
         <properties>
           <background color="-12828863"/>
           <foreground color="-1"/>
-          <text value="Go"/>
+          <text value="Check"/>
         </properties>
       </component>
       <component id="9f373" class="javax.swing.JButton" binding="getDailyReportButton">
@@ -172,7 +160,7 @@
         <properties>
           <background color="-12828863"/>
           <foreground color="-1"/>
-          <text value="Go"/>
+          <text value="Check"/>
         </properties>
       </component>
       <component id="f06b5" class="javax.swing.JLabel" binding="customerNameLabel">
@@ -197,6 +185,18 @@
           <horizontalAlignment value="10"/>
           <text value=""/>
           <toolTipText value=""/>
+        </properties>
+      </component>
+      <component id="45c73" class="javax.swing.JButton" binding="checkAllCustomersButton">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12828863"/>
+          <foreground color="-1"/>
+          <text value="Check"/>
         </properties>
       </component>
     </children>

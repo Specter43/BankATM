@@ -40,7 +40,42 @@ public class ManagerInfoWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Specific", "");
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Specific", customerNameTextField.getText());
+            }
+        });
+        checkAllCustomersButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("All", "");
+            }
+        });
+        checkPoorCustomersButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Poor", "");
+            }
+        });
+        getDailyReportButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                TransactionWindow transactionWindow = new TransactionWindow("Manager", "");
+            }
+        });
+        updateStockPriceButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                StockWindow stockWindow = new StockWindow("Manager Update Price", "");
+            }
+        });
+        changeStockStatusButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                StockWindow stockWindow = new StockWindow("Manager Change Status", "");
             }
         });
     }

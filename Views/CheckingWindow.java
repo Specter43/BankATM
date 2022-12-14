@@ -1,11 +1,12 @@
 package Views;
 
-import Personnel.*;
-
-import javax.swing.*;
-import Account.*;
+import Account.AccountChecking;
+import Personnel.Customer;
+import Personnel.Manager;
+import Personnel.Personnel;
 import Views.CustomeComponents.ButtonList;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -44,8 +45,8 @@ public class CheckingWindow extends JFrame {
             frame.setLocation(gd[screen].getDefaultConfiguration().getBounds().x,
                     gd[0].getDefaultConfiguration().getBounds().y + frame.getY());
         } else if( gd.length > 0 ) {
-            frame.setLocation(gd[1].getDefaultConfiguration().getBounds().x,
-                    gd[1].getDefaultConfiguration().getBounds().y + frame.getY());
+            frame.setLocation(gd[0].getDefaultConfiguration().getBounds().x,
+                    gd[0].getDefaultConfiguration().getBounds().y + frame.getY());
         } else {
             throw new RuntimeException( "No Screens Found" );
         }

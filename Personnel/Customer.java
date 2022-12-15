@@ -46,15 +46,16 @@ public class Customer extends Personnel {
         List<Integer> lines = new ArrayList<>();
         List<String> accountIDs= new ArrayList<>();
         for(int i = 0 ; i <personIDs.size(); i++){
+            System.out.println("account IDs from Personnel.txt:" + persons.get("accountID").get(i)+"personnelID IDs from Personnel.txt:" + persons.get("ID").get(i));
             if(personIDs.get(i).equals(Integer.toString( customer.getID()))){
-                accountIDs.add(  persons.get("AccountID").get(i));
-                System.out.println(persons.get("AccountID").get(i));
+                System.out.println( "Added account to look for:"+persons.get("accountID").get(i));
+                accountIDs.add(  persons.get("accountID").get(i));
             }
         }
         AccountChecking checking = null;
         for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                System.out.println("checking id:" + checkings.get("accID").get(i));
+            System.out.println("checking id:" + checkings.get("accID").get(i) + "personnelID:" + checkings.get("personnelID").get(i));
+            if(accountIDs.contains(checkings.get("accID").get(i)) && checkings.get("personnelID").get(i).equals(customer.getIDString())){
                 checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),checkings.get("personnelID").get(i),Double.parseDouble( checkings.get("BalanceUSD").get(i))
                         ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
                 break;
@@ -62,7 +63,8 @@ public class Customer extends Personnel {
         }
         AccountSaving saving  = null;
         for(int i = 0 ; i < savings.get("accID").size(); i++  ){
-            if(accountIDs.contains(savings.get("accID").get(i))){
+            System.out.println("saving id:" + savings.get("accID").get(i) + "personnelID:" + savings.get("personnelID").get(i));
+            if(accountIDs.contains(savings.get("accID").get(i)) && savings.get("personnelID").get(i).equals(customer.getIDString())){
                 System.out.println( "saving id: " + (savings.get("accID").get(i)));
                 saving= new AccountSaving(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
                         ,Double.parseDouble( savings.get("BalanceEURO").get(i)),Double.parseDouble( savings.get("BalanceRMB").get(i)));

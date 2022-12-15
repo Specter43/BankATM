@@ -16,6 +16,8 @@ public class SpecificCustomerWindow extends JFrame{
     private final String checkerMode;
     private final Customer customerName;
     private JFrame previous;
+
+    private JFrame current;
     private JPanel basePanel;
     private JPanel CenterPanel;
     private JPanel EastPanel;
@@ -34,8 +36,10 @@ public class SpecificCustomerWindow extends JFrame{
         this.previous= previous;
         this.checkerMode = checkerMode;
         this.customerName = customer;
+        current = this;
         previous.setVisible(false);
         createWindow(checkerMode, customer);
+
         currencyBox.addItem("BalanceUSD");
         currencyBox.addItem("BalanceEURO");
         currencyBox.addItem("BalanceRMB");
@@ -102,12 +106,11 @@ public class SpecificCustomerWindow extends JFrame{
                         Customer.withdrawFromCheckingOrSaving(customerName.getID(),
                                 amount,"checking",(String)currencyBox.getSelectedItem());
                         customerName.findAllAccounts(customerName);
-                        if(((String)currencyBox.getSelectedItem()).equals("BalanceUSD"))
-                            checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getUSDBalance()));
-                        else if(((String)currencyBox.getSelectedItem()).equals("BalanceEURO"))
-                            checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getEUROBalance()));
-                        else if(((String)currencyBox.getSelectedItem()).equals("BalanceRMB"))
-                            checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getRMBBalance()));
+                        initChecking(customerName.getChecking());
+                        CenterPanel.remove(0);
+                        CenterPanel.add(checkingAccountsList,0);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
 
                     }
                 });
@@ -120,12 +123,11 @@ public class SpecificCustomerWindow extends JFrame{
                                 Customer.deposit (customerName.getID(),
                                         amount,"checking",(String)currencyBox.getSelectedItem());
                                 customerName.findAllAccounts(customerName);
-                                if(((String)currencyBox.getSelectedItem()).equals("BalanceUSD"))
-                                    checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getUSDBalance()));
-                                else if(((String)currencyBox.getSelectedItem()).equals("BalanceEURO"))
-                                    checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getEUROBalance()));
-                                else if(((String)currencyBox.getSelectedItem()).equals("BalanceRMB"))
-                                    checkingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getChecking().getRMBBalance()));
+                                initChecking(customerName.getChecking());
+                                CenterPanel.remove(0);
+                                CenterPanel.add(checkingAccountsList,0);
+                                CenterPanel.revalidate();
+                                CenterPanel.repaint();
 
                             }
                         });
@@ -135,33 +137,24 @@ public class SpecificCustomerWindow extends JFrame{
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
-                        Customer.closeCheckingAccount(customerName.getID());
-                        checkingAccountsList.removeLine(0);
-                        //checkingAccountsList =  new ButtonList(800,200,defaultColor);
-                        ArrayList<String> savingSections = new ArrayList<>();
-                        ArrayList<String> savingButtons= new ArrayList<>();
-                        savingButtons.add("Add");
-                        checkingAccountsList.initLayout(50,10,savingSections,savingButtons);
-                        checkingAccountsList.addOneLine(50,10,1,savingSections,savingButtons);
+                        if(!Customer.closeCheckingAccount(customerName.getID())){
+                            System.out.println("Not closing with Close Button");
+                            return;
+                        }
+                        System.out.println("Close activated");
 
-                        checkingAccountsList.getActions().get(0).get("Add").addMouseListener(
+                        customerName.findAllAccounts(customerName);
+                        initCheckingWithAdd();
+                        CenterPanel.remove(0);
+                        CenterPanel.add(checkingAccountsList,0);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
 
-                                new MouseAdapter() {
-                                    @Override
-                                    public void mouseClicked(MouseEvent e) {
-                                        super.mouseClicked(e);
-                                        Customer.createAccount("checking",customerName.getID());
-                                        initChecking(customerName.getChecking());
-                                    }
-                                }
-                        );
                     }
 
                 });
-        ;
 
-        checkingAccountsList.revalidate();
-        checkingAccountsList.repaint();
+
     }
 
     private int askForValidNumber(){
@@ -174,6 +167,7 @@ public class SpecificCustomerWindow extends JFrame{
     }
 
     private void initCheckingWithAdd(){
+        System.out.println("Displaying add on checking");
 
         checkingAccountsList =  new ButtonList(800,200,defaultColor);
         ArrayList<String> checkingSections = new ArrayList<>();
@@ -188,12 +182,20 @@ public class SpecificCustomerWindow extends JFrame{
                     public void mouseClicked(MouseEvent e) {
                         super.mouseClicked(e);
                         Customer.createAccount("checking",customerName.getID());
+                        customerName.findAllAccounts(customerName);
                         initChecking(customerName.getChecking());
+                        CenterPanel.remove(0);
+                        CenterPanel.add(checkingAccountsList,0);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
                     }
                 }
         );
-        checkingAccountsList.revalidate();
-        checkingAccountsList.repaint();
+
+
+        current.invalidate();
+        current.revalidate();
+        current.repaint();
     }
 
     private void initSaving(AccountSaving account){
@@ -225,13 +227,15 @@ public class SpecificCustomerWindow extends JFrame{
                                 int amount = askForValidNumber();
                                 Customer.withdrawFromCheckingOrSaving(customerName.getID(),
                                         amount,"saving",(String)currencyBox.getSelectedItem());
+
                                 customerName.findAllAccounts(customerName);
-                                if(((String)currencyBox.getSelectedItem()).equals("BalanceUSD"))
-                                    savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getUSDBalance()));
-                                else if(((String)currencyBox.getSelectedItem()).equals("BalanceEURO"))
-                                    savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getEUROBalance()));
-                                else if(((String)currencyBox.getSelectedItem()).equals("BalanceRMB"))
-                                    savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getRMBBalance()));
+                                initSaving(customerName.getSaving());
+                                CenterPanel.remove(1);
+                                CenterPanel.add(savingAccountsList,1);
+                                CenterPanel.revalidate();
+                                CenterPanel.repaint();
+
+
 
                             }
                         });
@@ -244,12 +248,11 @@ public class SpecificCustomerWindow extends JFrame{
                         Customer.deposit (customerName.getID(),
                                 amount,"saving",(String)currencyBox.getSelectedItem());
                         customerName.findAllAccounts(customerName);
-                        if(((String)currencyBox.getSelectedItem()).equals("BalanceUSD"))
-                            savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getUSDBalance()));
-                        else if(((String)currencyBox.getSelectedItem()).equals("BalanceEURO"))
-                            savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getEUROBalance()));
-                        else if(((String)currencyBox.getSelectedItem()).equals("BalanceRMB"))
-                            savingAccountsList.getInfoSections().get(0).get((String)currencyBox.getSelectedItem()).setText(Double.toString( customerName.getSaving().getRMBBalance()));
+                        initSaving(customerName.getSaving());
+                        CenterPanel.remove(1);
+                        CenterPanel.add(savingAccountsList,1);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
 
                     }
                 });
@@ -262,12 +265,20 @@ public class SpecificCustomerWindow extends JFrame{
                                 super.mouseClicked(e);
                                 int amount = askForValidNumber();
                                 Customer.transferFunds(customerName.getID(),amount);
+                                customerName.findAllAccounts(customerName);
+                                initSaving(customerName.getSaving());
+                                CenterPanel.remove(1);
+                                CenterPanel.add(savingAccountsList,1);
+                                CenterPanel.revalidate();
+                                CenterPanel.repaint();
+
                             }
                         });
         ;
 
-        savingAccountsList.revalidate();
-        savingAccountsList.repaint();
+        current.invalidate();
+        current.revalidate();
+        current.repaint();
     }
     private void initSavingWithAdd(){
 
@@ -285,13 +296,20 @@ public class SpecificCustomerWindow extends JFrame{
                         super.mouseClicked(e);
 
                         Customer.createAccount("saving",customerName.getID());
+                        System.out.println("Trying to initialize saving");
+                        customerName.findAllAccounts(customerName);
                         initSaving(customerName.getSaving());
+                        CenterPanel.remove(1);
+                        CenterPanel.add(savingAccountsList,1);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
                     }
                 }
         );
 
-        savingAccountsList.revalidate();
-        savingAccountsList.repaint();
+        current.invalidate();
+        current.revalidate();
+        current.repaint();
     }
 
         public void initializeInfo(){

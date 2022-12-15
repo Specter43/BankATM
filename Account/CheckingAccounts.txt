@@ -1,5 +1,4 @@
 personnelID/accID/BalanceUSD/BalanceEURO/BalanceRMB
-11 0 0 0 0
 12 1 0 0 0
 2 3 123 456 789
-1 4 -50.0 0 0
+1 4 851.0 0 0

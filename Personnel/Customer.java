@@ -20,8 +20,8 @@ public class Customer extends Personnel {
     private ArrayList<Asset> assets;
 
 
-    public void createAccount(String accountType) {
-        int ID = super.getID();
+    public void createAccount(String accountType, int ID ) {
+
         AccountFactory accountFactory = new AccountFactory();
         if(accountType.equals("Checking")){
             FileOperator fileOperator = new FileOperator();

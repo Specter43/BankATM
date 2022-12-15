@@ -1,6 +1,8 @@
 package Views;
 
+import Account.AccountChecking;
 import Input.FileOperator;
+import Personnel.Customer;
 import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
@@ -13,7 +15,7 @@ import java.util.List;
 public class SpecificCustomerWindow extends JFrame{
     private final Color defaultColor  = new Color(137,187,136);
     private final String checkerMode;
-    private final String customerName;
+    private final Customer customerName;
     private JFrame previous;
     private JPanel basePanel;
     private JPanel CenterPanel;
@@ -27,16 +29,16 @@ public class SpecificCustomerWindow extends JFrame{
     private ButtonList savingAccounts;
     private ButtonList securityAccounts;
 
-    public SpecificCustomerWindow(JFrame previous, String checkerMode, String customerID) {
+    public SpecificCustomerWindow(JFrame previous, String checkerMode, Customer customer) {
 
         this.previous= previous;
         this.checkerMode = checkerMode;
-        this.customerName = customerID;
+        this.customerName = customer;
         previous.setVisible(false);
-        createWindow(checkerMode, customerID);
+        createWindow(checkerMode, customer);
     }
 
-    private void createWindow(String checkerMode, String customerName) {
+    private void createWindow(String checkerMode, Customer customer) {
         CenterPanel.setLayout(new GridLayout(3,1));
         checkingAccounts =  new ButtonList(800,200,defaultColor);
 
@@ -94,25 +96,9 @@ public class SpecificCustomerWindow extends JFrame{
     }
 
     public void initializeInfo(){
-        FileOperator fileOperator = new FileOperator();
-        HashMap<String, java.util.List<String>> persons= fileOperator.readFile("Personnel/Personnels.txt");
-        HashMap<String, java.util.List<String>> checkings= fileOperator.readFile("Account/CheckingAccounts.txt");
-        HashMap<String, java.util.List<String>> savings= fileOperator.readFile("Account/SavingsAccounts.txt");
-        HashMap<String, List<String>> securities= fileOperator.readFile("Account/SecurityAccounts.txt");
-        List<String> personIDs =  persons.get("ID");
-        List<Integer> lines = new ArrayList<>();
-        List<String> accountIDs= new ArrayList<>();
-        for(int i = 0 ; i <personIDs.size(); i++){
-            if(personIDs.get(i).equals(customerName)){
-               accountIDs.add(  persons.get("AccountID").get(i));
-            }
-        }
 
-        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
 
-        }
-
-        checkingAccounts.getInfoSections().get(0).get("Account#").setText("");
+        //checkingAccounts.getInfoSections().get(0).get("Account#").setText("");
 
 
     }

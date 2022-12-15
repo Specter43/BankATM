@@ -1,2 +1,4 @@
-accID/BalanceUSD/BalanceEURO/BalanceRMB
-A -100 1200 888
+personnelID/accID/BalanceUSD/BalanceEURO/BalanceRMB
+11 0 0 0 0
+12 1 0 0 0
+2 3 123 456 789

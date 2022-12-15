@@ -64,7 +64,7 @@ public class CheckCustomerWindow extends JFrame {
                     content.addOneLine(50, 10, 1, sections, buttons);
                     content.getInfoSections().get(i).get("ID").setText(customers.get("ID").get(i));
                     content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
-                    content.getInfoSections().get(i).get("Account").setText(customers.get("AccountID").get(i));
+                    content.getInfoSections().get(i).get("Account").setText(customers.get("accountID").get(i));
                     found++;
                     centerPanel.add(content);
                     setVisible(true);
@@ -80,7 +80,7 @@ public class CheckCustomerWindow extends JFrame {
                 content.addOneLine(50, 10,1, sections, buttons);
                 content.getInfoSections().get(i).get("ID").setText(customers.get("ID").get(i));
                 content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
-                content.getInfoSections().get(i).get("Account").setText(customers.get("AccountID").get(i));
+                content.getInfoSections().get(i).get("Account").setText(customers.get("accountID").get(i));
             }
             centerPanel.add(content);
             setVisible(true);
@@ -95,7 +95,7 @@ public class CheckCustomerWindow extends JFrame {
             HashMap<String, List<String>> securityAccounts = fileOperator.readFile("Account/SecurityAccounts.txt");
             int found = 0;
             for (int i = 0; i < customers.get("ID").size(); i++) {
-                String currentAccID = customers.get("AccountID").get(i);
+                String currentAccID = customers.get("accountID").get(i);
                 for (String accID : checkingAccounts.get("accID")) {
                     if (currentAccID.equals(accID)) {
                         double currentUSD = Double.parseDouble(checkingAccounts.get("BalanceUSD").get(i));
@@ -105,7 +105,7 @@ public class CheckCustomerWindow extends JFrame {
                             content.addOneLine(50, 10,1, sections, buttons);
                             content.getInfoSections().get(i).get("ID").setText(customers.get("ID").get(i));
                             content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
-                            content.getInfoSections().get(i).get("Account").setText(customers.get("AccountID").get(i));
+                            content.getInfoSections().get(i).get("Account").setText(customers.get("accountID").get(i));
                             found++;
                             if (currentUSD < 0) {
                                 content.getInfoSections().get(i).get("Owe USD").setText(Double.toString(currentUSD));

@@ -53,7 +53,7 @@ public class FrameATM extends JFrame {
                 String password = Stream.of(passwordInput).map(String::new).collect(Collectors.joining());
                 ArrayList<Object> signupInput = Bank.signUp(usernameTextField.getText(), password);
                 if ((Boolean) signupInput.get(0)) {
-                    SpecificCustomerWindow specificCustomerWindow = new SpecificCustomerWindow(current, "Customer", ((Customer) signupInput.get(1)));
+                    SpecificCustomerWindow specificCustomerWindow = new SpecificCustomerWindow(current, "Customer", (Customer) signupInput.get(1));
                 }
             }
         });

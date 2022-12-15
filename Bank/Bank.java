@@ -61,7 +61,7 @@ public class Bank {
             FileWriter fw = new FileWriter("Personnel/Personnels.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             int id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
-            bw.write("\n"+id+" "+userName+" "+pin+" "+"true"+" "+"abced");
+            bw.write("\n"+id+" "+userName+" "+pin+" "+"true"+" "+"_");
             bw.close();
             Customer customer = new Customer(id, userName);
             return new ArrayList<Object>(){{add(true); add(customer);}};

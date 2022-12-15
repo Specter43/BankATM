@@ -1,19 +1,20 @@
 package Personnel;
 
-import Account.Account;
-import Factory.AccountFactory;
-import Input.FileOperator;
-import Service.Loan;
-import asset.Asset;
 import Account.*;
+import Input.FileOperator;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 public class Customer extends Personnel {
     private HashMap<String, Account> accounts;
     private boolean collateral;
-    private ArrayList<Asset> assets;
 
     public Customer() {
     }
@@ -21,6 +22,51 @@ public class Customer extends Personnel {
     public Customer(int ID, String name) {
         super(ID, name);
         collateral = true;
+        findAllAccounts(this);
+    }
+
+    public void findAllAccounts(Customer customer) {
+        FileOperator fileOperator = new FileOperator();
+        HashMap<String, java.util.List<String>> persons= fileOperator.readFile("Personnel/Personnels.txt");
+        HashMap<String, java.util.List<String>> checkings= fileOperator.readFile("Account/CheckingAccounts.txt");
+        HashMap<String, java.util.List<String>> savings= fileOperator.readFile("Account/SavingsAccounts.txt");
+        HashMap<String, List<String>> securities= fileOperator.readFile("Account/SecurityAccounts.txt");
+        List<String> personIDs =  persons.get("ID");
+        List<Integer> lines = new ArrayList<>();
+        List<String> accountIDs= new ArrayList<>();
+        for(int i = 0 ; i <personIDs.size(); i++){
+            if(personIDs.get(i).equals(customer.getName())){
+                accountIDs.add(  persons.get("AccountID").get(i));
+            }
+        }
+        AccountChecking checking = null;
+        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
+            if(accountIDs.contains(checkings.get("accID").get(i))){
+                checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+                break;
+            }
+        }
+        AccountChecking saving= null;
+        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
+            if(accountIDs.contains(checkings.get("accID").get(i))){
+                saving= new AccountSaving(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+                break;
+            }
+        }
+        AccountChecking security = null;
+        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
+            if(accountIDs.contains(checkings.get("accID").get(i))){
+                security= new AccountSecurity(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+                break;
+            }
+        }
+        customer.accounts = new HashMap<String, Account>();
+        customer.accounts.put("Checking", checking);
+        customer.accounts.put("Savings", saving);
+        customer.accounts.put("Security", security);
     }
 
     public static boolean createAccount(String accountType, int ID) {

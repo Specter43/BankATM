@@ -1,2 +1,2 @@
-debtorID/amount/interestRate
-3 5000.0 0.09
+1 49999.0 0.08
+1 50000 0.08

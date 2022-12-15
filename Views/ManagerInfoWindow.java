@@ -76,7 +76,7 @@ public class ManagerInfoWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                StockWindow stockWindow = new StockWindow(current, "Customer", "1");
+                StockWindow stockWindow = new StockWindow(current, "Manager Change Status", null);
             }
         });
     }

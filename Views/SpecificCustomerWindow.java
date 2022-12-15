@@ -26,6 +26,8 @@ public class SpecificCustomerWindow extends JFrame{
     private JPanel NorthPanel;
     private JButton exitButton;
     private JComboBox currencyBox;
+    private JButton stockMarketButton;
+    private JButton loanButton;
 
     private ButtonList checkingAccountsList;
     private ButtonList savingAccountsList;
@@ -53,6 +55,25 @@ public class SpecificCustomerWindow extends JFrame{
         currencyBox.addItem("BalanceUSD");
         currencyBox.addItem("BalanceEURO");
         currencyBox.addItem("BalanceRMB");
+        stockMarketButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (customer.getSaving().getUSDBalance() >= 2500) {
+                    StockWindow stockWindow = new StockWindow(current, "Customer", Integer.toString(customer.getID()));
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "You don't have enough money in savings to start trading.");
+                }
+            }
+        });
+        loanButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                LoanWindow loanWindow = new LoanWindow(current, Integer.toString(customer.getID()));
+            }
+        });
     }
 
     private void createWindow(String checkerMode, Customer customer) {

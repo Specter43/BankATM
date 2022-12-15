@@ -1,6 +1,5 @@
 package Factory;
 
-import Account.AccountChecking;
 import Account.AccountSaving;
 import Account.AccountSecurity;
 
@@ -21,10 +20,10 @@ public class AccountFactory {
      * It generates a checking account and returns it.
      * @return AccountChecking: a checking account
      */
-    public AccountChecking generateCheckingAccount(){
-        AccountChecking checkingAccount = new AccountChecking("dummyID",0,0,0);
-        return checkingAccount;
-    }
+//    public AccountChecking generateCheckingAccount(){
+//        AccountChecking checkingAccount = new AccountChecking("dummyID",0,0,0);
+//        return checkingAccount;
+//    }
 
     /**
      * It generates a saving account and returns it.

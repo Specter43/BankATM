@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,25 +43,26 @@ public class TransactionWindow extends JFrame {
         ButtonList content =  new ButtonList(800,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        sections.add("From");
-        sections.add("To");
-        sections.add("Amount");
         sections.add("Date");
+        sections.add("Name");
+        sections.add("ID");
+        sections.add("Type");
+        sections.add("Amount");
         FileOperator fileOperator = new FileOperator();
-        HashMap<String, List<String>> transactions = fileOperator.readFile("Account/Transactions.txt");
+        HashMap<String, List<String>> transactions = fileOperator.readFile("Bank/transactions.txt");
 
         if (checkerMode.equals("Manager")) {
             setTitle("Daily Report");
             content.initLayout(50,10, sections, buttons);
-            LocalDate currentDate = java.time.LocalDate.now();
             int found = 0;
-            for (int i = 0; i < transactions.get("Date").size(); i++) {
-                if (LocalDate.parse(transactions.get("Date").get(i)).equals(currentDate)) {
+            for (int i = 0; i < transactions.get("date").size(); i++) {
+                if (transactions.get("date").get(i).equals("this-day")) {
                     content.addOneLine(50, 10, 1, sections, buttons);
-                    content.getInfoSections().get(found).get("From").setText(transactions.get("sourcePersonnel").get(i));
-                    content.getInfoSections().get(found).get("To").setText(transactions.get("toPersonnel").get(i));
+                    content.getInfoSections().get(found).get("Date").setText(transactions.get("date").get(i));
+                    content.getInfoSections().get(found).get("Name").setText(transactions.get("name").get(i));
+                    content.getInfoSections().get(found).get("ID").setText(transactions.get("id").get(i));
+                    content.getInfoSections().get(found).get("Type").setText(transactions.get("transaction_type").get(i));
                     content.getInfoSections().get(found).get("Amount").setText(transactions.get("amount").get(i));
-                    content.getInfoSections().get(found).get("Date").setText(transactions.get("Date").get(i));
                     found++;
                 }
             }

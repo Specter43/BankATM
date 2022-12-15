@@ -48,25 +48,25 @@ public class Customer extends Personnel {
             }
         }
         AccountChecking saving= null;
-        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                saving= new AccountSaving(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
-                break;
-            }
-        }
-        AccountChecking security = null;
-        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                security= new AccountSecurity(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
-                break;
-            }
-        }
-        customer.accounts = new HashMap<String, Account>();
-        customer.accounts.put("Checking", checking);
-        customer.accounts.put("Savings", saving);
-        customer.accounts.put("Security", security);
+//        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
+//            if(accountIDs.contains(checkings.get("accID").get(i))){
+//                saving= new AccountSaving(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+//                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+//                break;
+//            }
+//        }
+//        AccountChecking security = null;
+//        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
+//            if(accountIDs.contains(checkings.get("accID").get(i))){
+//                security= new AccountSecurity(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+//                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+//                break;
+//            }
+//        }
+//        customer.accounts = new HashMap<String, Account>();
+//        customer.accounts.put("Checking", checking);
+//        customer.accounts.put("Savings", saving);
+//        customer.accounts.put("Security", security);
     }
 
     public static boolean createAccount(String accountType, int ID) {

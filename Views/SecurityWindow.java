@@ -1,15 +1,16 @@
 package Views;
 
-import Account.*;
-import Personnel.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import Account.AccountSecurity;
+import Personnel.Personnel;
 import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A class representing the security account window.
+ */
 public class SecurityWindow extends  JFrame{
 
     static Color defaultColor = new Color(137,187,136);

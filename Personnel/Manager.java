@@ -5,6 +5,9 @@ import Service.StockMarket;
 
 import java.util.ArrayList;
 
+/**
+ * A class representing a manager.
+ */
 public class Manager extends Personnel {
     private Bank bank;
     private StockMarket stockMarket;

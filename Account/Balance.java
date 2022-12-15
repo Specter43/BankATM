@@ -4,6 +4,9 @@ import Currency.CurrencyEURO;
 import Currency.CurrencyRMB;
 import Currency.CurrencyUSD;
 
+/**
+ * A class representing balance.
+ */
 public class Balance {
     private CurrencyUSD currencyUSD;
     private CurrencyEURO currencyEURO;

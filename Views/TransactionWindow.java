@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the transactions for the manager.
+ */
 public class TransactionWindow extends JFrame {
     private JFrame frame;
     private JPanel panel;

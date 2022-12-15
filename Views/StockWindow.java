@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the stock window.
+ */
 public class StockWindow extends JFrame {
     private JPanel panel;
     private JPanel westPanel;

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the stock market.
+ */
 public class StockMarket extends Service {
 
     static private StockMarket market;

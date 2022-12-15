@@ -1,5 +1,8 @@
 package Service;
 
+/**
+ * A class representing a stock.
+ */
 public class Stock {
     private String name;
     private double price;

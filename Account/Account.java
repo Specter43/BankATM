@@ -4,6 +4,9 @@ import Currency.CurrencyEURO;
 import Currency.CurrencyRMB;
 import Currency.CurrencyUSD;
 
+/**
+ * An abstract class representing an account.
+ */
 public abstract class Account {
     private Integer accID;
     private String personnelID;

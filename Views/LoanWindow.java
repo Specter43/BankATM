@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the loan window.
+ */
 public class LoanWindow extends JFrame {
     private JPanel panel;
     private JPanel centerPanel;

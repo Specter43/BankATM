@@ -5,6 +5,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+/**
+ * A class representing a table of contents and buttons.
+ */
 public class ButtonList extends JPanel {
 
     Color color;

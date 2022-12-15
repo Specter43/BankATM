@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the check customer window.
+ */
 public class CheckCustomerWindow extends JFrame {
     private final String checkMode;
     private final String customerName;

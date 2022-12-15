@@ -11,6 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+/**
+ * A class representing the main page for a customer.
+ */
 public class SpecificCustomerWindow extends JFrame{
     private final Color defaultColor  = new Color(137,187,136);
     private final String checkerMode;

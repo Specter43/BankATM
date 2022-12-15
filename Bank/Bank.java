@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * A class representing the Bank.
+ */
 public class Bank {
     ArrayList<Customer> getAllCustomers;
     Manager bankManager;

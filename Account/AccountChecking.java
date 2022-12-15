@@ -1,9 +1,8 @@
 package Account;
 
-import Currency.CurrencyEURO;
-import Currency.CurrencyRMB;
-import Currency.CurrencyUSD;
-
+/**
+ * A class representing a checking account.
+ */
 public class AccountChecking extends Account {
     private static double transactionFee = 50;
 

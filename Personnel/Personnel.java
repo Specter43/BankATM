@@ -1,8 +1,8 @@
 package Personnel;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
+/**
+ * An abstract class representing a Personnel.
+ */
 public abstract class Personnel {
     private int ID;
     private String name;

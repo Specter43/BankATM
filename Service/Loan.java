@@ -2,6 +2,9 @@ package Service;
 
 import Personnel.Customer;
 
+/**
+ * A class representing a loan.
+ */
 public class Loan extends Service {
     private double amount;
     private double interestRate;

@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class representing a file operator.
+ */
 public class FileOperator {
 
     public FileOperator() {

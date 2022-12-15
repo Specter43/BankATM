@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * A class representing the manager main page.
+ */
 public class ManagerInfoWindow extends JFrame {
     private JFrame frame;
     private JPanel Panel;

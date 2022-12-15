@@ -1,5 +1,8 @@
 package Currency;
 
+/**
+ * An abstract class representing the currency.
+ */
 public abstract class Currency {
     private double amount;
 

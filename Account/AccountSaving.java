@@ -1,5 +1,8 @@
 package Account;
 
+/**
+ * A class representing a saving account.
+ */
 public class AccountSaving extends Account {
     private Balance balance;
     private final double minimumBalanceToKeepSecurity = 2500.0;

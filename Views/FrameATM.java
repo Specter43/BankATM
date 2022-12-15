@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A class representing the login page of the bank.
+ */
 public class FrameATM extends JFrame {
     private JFrame frame;
     private Account currentAccount;

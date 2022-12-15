@@ -1,16 +1,17 @@
 package Views;
 
-import Personnel.*;
-
-import javax.swing.*;
-import Account.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import Account.AccountChecking;
+import Personnel.Customer;
+import Personnel.Personnel;
 import Views.CustomeComponents.ButtonList;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A class representing the checking account window.
+ */
 public class CheckingWindow extends JFrame {
 
     private final Color  defaultColor = new Color(137,187,136);

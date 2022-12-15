@@ -1,12 +1,10 @@
 package Personnel;
 
-import Account.*;
+import Account.Account;
+import Account.AccountChecking;
+import Account.AccountSaving;
 import Input.FileOperator;
-import Service.HoldingStock;
-import Service.Stock;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A class representing a customer.
+ */
 public class Customer extends Personnel {
     private HashMap<String, Account> accounts;
     private boolean collateral;

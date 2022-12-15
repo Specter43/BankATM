@@ -1,11 +1,14 @@
 package Account;
 
-import java.sql.Array;
+import Service.HoldingStock;
+import Service.Stock;
+import Service.StockMarket;
+
 import java.util.*;
-//import java.org.*;
 
-import Service.*;
-
+/**
+ * A class representing a security account.
+ */
 public class AccountSecurity extends Account {
     private final double minimumDeposit = 1000;
     private double deposit;

@@ -24,7 +24,7 @@ public class Bank {
      * returns true. If it doesn't match, returns false
      * @return true if identity matches, false if not.
      */
-    public boolean login(String userName, String pin){
+    public static boolean login(String userName, String pin){
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> output = fileOperator.readFile("Personnel/Personnels.txt");
         for(int i = 0; i<output.get("name").size(); i++){
@@ -44,7 +44,7 @@ public class Bank {
      * it will return true.
      * @return true/false
      */
-    public boolean signUp(String userName, String pin){
+    public static boolean signUp(String userName, String pin){
         if(pin.trim().equals("")){ //if the pin is empty, return false
             return false;
         }
@@ -57,7 +57,7 @@ public class Bank {
             FileWriter fw = new FileWriter("Personnel/Personnels.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             int id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
-            bw.write("\n"+id+" "+userName+" "+pin+" "+"abced");
+            bw.write("\n"+id+" "+userName+" "+pin+" "+"true"+" "+"abced");
             bw.close();
             System.out.println("Finished writing");
             return true;

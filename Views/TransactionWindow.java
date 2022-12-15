@@ -21,7 +21,7 @@ public class TransactionWindow extends JFrame {
         setContentPane(panel);
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ButtonList content =  new ButtonList(500,500, new Color(57, 155, 255));
+        ButtonList content =  new ButtonList(1000,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         sections.add("From");

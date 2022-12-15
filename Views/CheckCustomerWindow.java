@@ -5,6 +5,8 @@ import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,19 +16,34 @@ public class CheckCustomerWindow extends JFrame {
     private final String customerName;
     private JFrame frame;
     private JPanel panel;
+    private JPanel westPanel;
+    private JPanel northPanel;
+    private JPanel eastPanel;
+    private JPanel southPanel;
+    private JButton backButton;
+    private JPanel centerPanel;
 
-    public CheckCustomerWindow(String checkerMode, String customerName) {
+    public CheckCustomerWindow(JFrame previous, String checkerMode, String customerName) {
+        previous.setVisible(false);
         this.checkMode = checkerMode;
         this.customerName = customerName;
         createWindow(checkerMode, customerName);
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                previous.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
 
     private void createWindow(String checkerMode, String customerName) {
         setContentPane(panel);
         setTitle("Customer Checker");
-        setSize(600, 600);
+        setSize(1000, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ButtonList content =  new ButtonList(500,500, new Color(57, 155, 255));
+        ButtonList content =  new ButtonList(1000,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         sections.add("ID");
@@ -45,7 +62,7 @@ public class CheckCustomerWindow extends JFrame {
                     content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
                     content.getInfoSections().get(i).get("Account").setText(customers.get("AccountID").get(i));
                     found++;
-                    setContentPane(content);
+                    centerPanel.add(content);
                     setVisible(true);
                 }
             }
@@ -61,7 +78,7 @@ public class CheckCustomerWindow extends JFrame {
                 content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
                 content.getInfoSections().get(i).get("Account").setText(customers.get("AccountID").get(i));
             }
-            setContentPane(content);
+            centerPanel.add(content);
             setVisible(true);
         }
         else if (checkerMode.equals("Poor")){
@@ -106,7 +123,7 @@ public class CheckCustomerWindow extends JFrame {
                 }
             }
             if (found > 0) {
-                setContentPane(content);
+                centerPanel.add(content);
                 setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No one is owing money!");

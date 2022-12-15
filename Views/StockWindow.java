@@ -31,7 +31,7 @@ public class StockWindow extends JFrame {
         setTitle("Stock Market");
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ButtonList content =  new ButtonList(500,500, new Color(57, 155, 255));
+        ButtonList content =  new ButtonList(1000,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         sections.add("Date");
@@ -77,6 +77,7 @@ public class StockWindow extends JFrame {
             centerPanel.add(content);
             setVisible(true);
         }
+
         else if (checkerMode.equals("Manager Change Status")) {
             centerPanel.setLayout(new GridLayout(1, 1));
             buttons.add("Change");
@@ -112,6 +113,7 @@ public class StockWindow extends JFrame {
             centerPanel.add(content);
             setVisible(true);
         }
+
         else if (checkerMode.equals("Customer")) {
             centerPanel.setLayout(new GridLayout(2, 1));
             HashMap<String, String> Tradability = new HashMap<>();
@@ -145,7 +147,7 @@ public class StockWindow extends JFrame {
             // Add Sells
             ArrayList<String> sellButton = new ArrayList<String>(){{add("Sell");}};
             ArrayList<String> sellSections = new ArrayList<String>(){{add("Name"); add("Share"); add("Price"); add("Tradable");}};
-            ButtonList contentSell =  new ButtonList(500,500, new Color(57, 155, 255));
+            ButtonList contentSell =  new ButtonList(1000,600, new Color(57, 155, 255));
             contentSell.initLayout(50,10, sellSections, sellButton);
             HashMap<String, List<String>> stockHoldings = fileOperator.readFile("Account/SecurityAccounts.txt");
             found = 0;

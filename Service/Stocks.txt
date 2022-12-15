@@ -4,7 +4,7 @@ date/name/price/tradable
 2022-12-13 ORCL  78.42  true
 2022-12-13 ADBE  329.58  true
 2022-12-13 QCOM  118.83  true
-2022-12-14 AAPL 100.19 true
+2022-12-14 AAPL 100.19 false
 2022-12-14 MSFT 250.52 true
 2022-12-14 ORCL 70.42 true
 2022-12-14 ADBE  300.58  true

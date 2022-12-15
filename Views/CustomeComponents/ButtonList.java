@@ -49,7 +49,6 @@ public class ButtonList extends JPanel {
         labelTop.setAlignmentX(LEFT_ALIGNMENT);
         this.add(labelTop);
 
-
         updateLines();
 
     }

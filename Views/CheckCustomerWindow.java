@@ -51,6 +51,7 @@ public class CheckCustomerWindow extends JFrame {
         sections.add("Account");
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> customers = fileOperator.readFile("Personnel/Personnels.txt");
+        centerPanel.setLayout(new GridLayout(1,1));
 
         if (checkerMode.equals("Specific")) {
             int found = 0;

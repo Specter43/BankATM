@@ -35,3 +35,11 @@ this-day sam 1 withdrawUSD-for-closing 400.0
 this-day sam 1 withdrawEURO-for-closing 400.0
 this-day sam 1 withdrawRMB-for-closing 400.0
 this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 50.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 50.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0

@@ -51,19 +51,33 @@ public class Bank {
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> output = fileOperator.readFile("Personnel/Personnels.txt");
         if(output.get("name").contains(userName)){
+            System.out.println("User already exists");
             return false; //If the username already exist, return false.
         }
         try{
             FileWriter fw = new FileWriter("Personnel/Personnels.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
             int id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
-            bw.write("\n"+id+" "+userName+" "+pin+" "+"true"+" "+"abced");
+            bw.write("\n"+id+" "+userName+" "+pin+" "+"NA");
+            addCustomerToCollateral(id, userName);
             bw.close();
             System.out.println("Finished writing");
             return true;
         }catch (Throwable e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private static void addCustomerToCollateral(int id, String userName) {
+        try{
+            FileWriter fw = new FileWriter("Service/collateral.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("\n"+id+" "+userName+" "+"true");
+            bw.close();
+            System.out.println("Finished adding the new customer to collateral.txt");
+        }catch (Throwable e){
+            e.printStackTrace();
         }
     }
 }

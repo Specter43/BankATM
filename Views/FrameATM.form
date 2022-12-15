@@ -20,7 +20,7 @@
         </constraints>
         <properties>
           <background color="-1"/>
-          <text value=""/>
+          <text value="12345"/>
           <toolTipText value=""/>
         </properties>
       </component>
@@ -57,7 +57,7 @@
           <background color="-262145"/>
           <minimumSize width="30" height="30"/>
           <preferredSize width="30" height="30"/>
-          <text value=""/>
+          <text value="sam"/>
           <toolTipText value="Username"/>
         </properties>
       </component>

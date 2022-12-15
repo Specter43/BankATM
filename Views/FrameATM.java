@@ -26,7 +26,8 @@ public class FrameATM extends JFrame {
     public FrameATM() {
         createWindow();
         JFrame current = this;
-        logInButton.addMouseListener(new MouseAdapter() {
+        logInButton.addMouseListener(
+                new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);

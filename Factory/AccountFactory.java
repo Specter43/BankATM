@@ -22,7 +22,7 @@ public class AccountFactory {
      * @return AccountChecking: a checking account
      */
     public AccountChecking generateCheckingAccount(){
-        AccountChecking checkingAccount = new AccountChecking("dummyID",0,0,0);
+        AccountChecking checkingAccount = new AccountChecking(0,"dummyPID",0,0,0);
         return checkingAccount;
     }
 

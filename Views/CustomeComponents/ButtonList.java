@@ -60,6 +60,7 @@ public class ButtonList extends JPanel {
         actionLines.remove(i);
         //buttonLine.setVisible(true);
         actions.remove(i);
+        updateLines();
 
     }
 

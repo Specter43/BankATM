@@ -2,7 +2,11 @@ package Personnel;
 
 import Account.*;
 import Input.FileOperator;
+import Service.HoldingStock;
+import Service.Stock;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +28,13 @@ public class Customer extends Personnel {
         collateral = true;
         findAllAccounts(this);
     }
+    public AccountChecking getChecking(){
+        return (AccountChecking) accounts.get("Checking");
+    }
+    public AccountSaving getSaving(){
+        return (AccountSaving) accounts.get("Saving");
+    }
+
 
     public void findAllAccounts(Customer customer) {
         FileOperator fileOperator = new FileOperator();
@@ -35,38 +46,35 @@ public class Customer extends Personnel {
         List<Integer> lines = new ArrayList<>();
         List<String> accountIDs= new ArrayList<>();
         for(int i = 0 ; i <personIDs.size(); i++){
-            if(personIDs.get(i).equals(customer.getName())){
+            if(personIDs.get(i).equals(Integer.toString( customer.getID()))){
                 accountIDs.add(  persons.get("AccountID").get(i));
+                System.out.println(persons.get("AccountID").get(i));
             }
         }
         AccountChecking checking = null;
         for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
             if(accountIDs.contains(checkings.get("accID").get(i))){
-                checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+                System.out.println("checking id:" + checkings.get("accID").get(i));
+                checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),checkings.get("personnelID").get(i),Double.parseDouble( checkings.get("BalanceUSD").get(i))
                         ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
                 break;
             }
         }
-        AccountChecking saving= null;
-        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                saving= new AccountSaving(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
+        AccountSaving saving  = null;
+        for(int i = 0 ; i < savings.get("accID").size(); i++  ){
+            if(accountIDs.contains(savings.get("accID").get(i))){
+                System.out.println( "saving id: " + (savings.get("accID").get(i)));
+                saving= new AccountSaving(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
+                        ,Double.parseDouble( savings.get("BalanceEURO").get(i)),Double.parseDouble( savings.get("BalanceRMB").get(i)));
                 break;
             }
         }
-        AccountChecking security = null;
-        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                security= new AccountSecurity(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
-                break;
-            }
-        }
+
+
         customer.accounts = new HashMap<String, Account>();
         customer.accounts.put("Checking", checking);
-        customer.accounts.put("Savings", saving);
-        customer.accounts.put("Security", security);
+        customer.accounts.put("Saving", saving);
+        customer.accounts.put("Security", null);
     }
 
     public static boolean createAccount(String accountType, int ID) {

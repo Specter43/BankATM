@@ -5,6 +5,8 @@ import Views.CustomeComponents.ButtonList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,15 +15,33 @@ import java.util.List;
 public class TransactionWindow extends JFrame {
     private JFrame frame;
     private JPanel panel;
-    public TransactionWindow(String checkerMode, String customerName) {
+    private JPanel westPanel;
+    private JPanel northPanel;
+    private JPanel eastPanel;
+    private JPanel southPanel;
+    private JPanel centerPanel;
+    private JButton backButton;
+
+    public TransactionWindow(JFrame previous, String checkerMode, String customerName) {
+        previous.setVisible(false);
         createWindow(checkerMode, customerName);
+
+        backButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                previous.setVisible(true);
+                setVisible(false);
+            }
+        });
     }
 
     private void createWindow(String checkerMode, String customerName) {
         setContentPane(panel);
-        setSize(600, 600);
+        setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ButtonList content =  new ButtonList(1000,600, new Color(57, 155, 255));
+        centerPanel.setLayout(new GridLayout(1, 1));
+        ButtonList content =  new ButtonList(800,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
         sections.add("From");
@@ -47,7 +67,7 @@ public class TransactionWindow extends JFrame {
                 }
             }
             if (found > 0) {
-                setContentPane(content);
+                centerPanel.add(content);
                 setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "There is no transactions today.");

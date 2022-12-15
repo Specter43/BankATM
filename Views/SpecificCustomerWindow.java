@@ -38,6 +38,16 @@ public class SpecificCustomerWindow extends JFrame{
         this.customerName = customer;
         current = this;
         previous.setVisible(false);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                current.setVisible(false);
+                previous.setVisible(true);
+            }
+        });
+
+
         createWindow(checkerMode, customer);
 
         currencyBox.addItem("BalanceUSD");

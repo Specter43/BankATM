@@ -29,19 +29,24 @@ public class ButtonList extends JPanel {
 
     public void initLayout(int lineHeight, int unitWidth, ArrayList<String> sections , ArrayList<String> buttons){
         JPanel labelTop = new JPanel();
-        labelTop.setMaximumSize(new Dimension(width,lineHeight));
+        labelTop.setMinimumSize(new Dimension(width,lineHeight));
+
+        //labelTop.setPreferredSize(new Dimension(width,lineHeight));
         labelTop.setLayout(new BoxLayout(labelTop,BoxLayout.X_AXIS));
         for(String s:sections){
             JLabel   label=  new JLabel(s);
             label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
-            label.setAlignmentX(LEFT_ALIGNMENT);
-            label.setAlignmentY(TOP_ALIGNMENT);
+            label.setAlignmentX(JLabel.LEADING);
+            label.setAlignmentY(JLabel.TOP_ALIGNMENT);
             //label.setVisible(true);
             labelTop.add(label);
         }
         JLabel   actionLabel=  new JLabel("Actions");
+        actionLabel.setAlignmentX(LEFT_ALIGNMENT);
+        actionLabel.setAlignmentY(TOP_ALIGNMENT);
         actionLabel.setMinimumSize(new Dimension(  width/ 2 ,lineHeight));
         labelTop.add(actionLabel);
+        labelTop.setAlignmentX(LEFT_ALIGNMENT);
         this.add(labelTop);
 
 
@@ -69,6 +74,9 @@ public class ButtonList extends JPanel {
         //labelLine.setPreferredSize(new Dimension(maxLength * sections.size(),lineHeight));
         labelLine.setMinimumSize(new Dimension(width/ 2,lineHeight));
         labelLine.setPreferredSize(new Dimension(width/2,lineHeight));
+
+        labelLine.setAlignmentY(JLabel.TOP);
+        labelLine.setAlignmentX(JLabel.LEFT);
         for(String s: sections){
             JLabel   label=  new JLabel(s);
             label.setMaximumSize(new Dimension(  width/ 2 / sections.size(),lineHeight));
@@ -92,8 +100,8 @@ public class ButtonList extends JPanel {
         //buttonLine.setLayout(new GridLayout(-1,3));
         buttonLine.setLayout(new BoxLayout(buttonLine,BoxLayout.X_AXIS));
         buttonLine.setBackground(color);
-        buttonLine.setAlignmentX(Component.CENTER_ALIGNMENT);
-        buttonLine.setAlignmentY(Component.CENTER_ALIGNMENT);
+        buttonLine.setAlignmentX(Button.LEFT_ALIGNMENT);
+        buttonLine.setAlignmentY(Button.TOP_ALIGNMENT);
         for(String s: buttons){
             JButton button  = new JButton(s);
             button.setMaximumSize(new Dimension( width/2/ buttonsPerLine,lineHeight));
@@ -134,14 +142,15 @@ public class ButtonList extends JPanel {
         JPanel left= new JPanel();
         left.setLayout(new BoxLayout(left  ,BoxLayout.Y_AXIS));
         left.setMinimumSize(new Dimension(width/2,height));
+        left.setAlignmentY(TOP_ALIGNMENT);
         //left.setLayout(new FlowLayout());
         leftAndRight.add(left,0);
         JPanel right  = new JPanel();
         right.setLayout(new BoxLayout(right,BoxLayout.Y_AXIS));
         right.setMinimumSize(new Dimension(width/2,height));
-        //right.setLayout(new FlowLayout());
-        leftAndRight.add(right,1);
+        right.setAlignmentY(TOP_ALIGNMENT);
 
+        leftAndRight.add(right,1);
         leftAndRight.setBackground(color);
         //this.setForeground(color);
         for(int i = 0 ; i < lineCount; i++){//from left to right from up to down

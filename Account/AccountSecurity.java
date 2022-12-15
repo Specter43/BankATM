@@ -16,6 +16,30 @@ public class AccountSecurity extends Account {
 
     private HashMap<String, Double>spending;
 
+    public AccountSecurity(String ID) {
+        super(ID);
+    }
+
+    @Override
+    public double getEUROBalance() {
+        return 0.0;
+    }
+
+    @Override
+    public double getRMBBalance() {
+        return 0.0;
+    }
+
+    @Override
+    public void depositEURO(double amount) {
+        return;
+    }
+
+    @Override
+    public void depositRMB(double amount) {
+       return;
+    }
+
     public void buy(HoldingStock stock) {
         double cost = stock.getBuyInPrice() * stock.getShares();
         if(deposit - cost < minimumDeposit ){

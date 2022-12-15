@@ -36,11 +36,47 @@ public class ManagerInfoWindow extends JFrame {
         });
 
         setVisible(true);
+        JFrame current = this;
         checkSpecificCustomerButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CheckCustomerWindow checkCustomerWindow = new CheckCustomerWindow("Specific", "");
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow(current,"Specific", customerNameTextField.getText());
+            }
+        });
+        checkAllCustomersButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow(current,"All","" );
+            }
+        });
+        checkPoorCustomersButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                CheckCustomerWindow checkSpecificCustomerWindow = new CheckCustomerWindow(current,"Poor","" );
+            }
+        });
+        getDailyReportButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                TransactionWindow transactionWindow = new TransactionWindow(current,"Manager", "");
+            }
+        });
+        updateStockPriceButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                StockWindow stockWindow = new StockWindow(current,"Manager Update Price", null);
+            }
+        });
+        changeStockStatusButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                StockWindow stockWindow = new StockWindow(current, "Customer", "1");
             }
         });
     }

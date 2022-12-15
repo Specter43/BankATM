@@ -1,7 +1,5 @@
 package Service;
 
-import Service.Stock;
-
 /**
  * HoldingStock is the stock that a customer gets when he buys a stock
  * from the stock market.
@@ -15,6 +13,12 @@ public class HoldingStock {
     private Stock stock;
     private int shares;
     private double buyInPrice;
+
+    public HoldingStock(Stock stock, int shares, double buyInPrice) {
+        this.stock = stock;
+        this.shares = shares;
+        this.buyInPrice = buyInPrice;
+    }
 
     public Stock getStock() {
         return stock;

@@ -10,11 +10,17 @@ public class AccountChecking extends Account {
     private CurrencyEURO euroBalance;
     private CurrencyRMB rmbBalance;
 
-    public AccountChecking() {
-        usdBalance = new CurrencyUSD(0);
-        euroBalance = new CurrencyEURO(0);
-        rmbBalance = new CurrencyRMB(0);
+
+    public AccountChecking(String id,double usd, double euro, double rmb) {
+        super(id);
+        usdBalance = new CurrencyUSD(usd);
+        euroBalance = new CurrencyEURO(euro);
+        rmbBalance = new CurrencyRMB(rmb);
     }
+
+
+
+
 
 
     public void withdrawal(String currencyType , double amount) throws  RuntimeException {

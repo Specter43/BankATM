@@ -35,8 +35,26 @@ public class Balance {
         }
     }
 
+
+
     public double getUSDBalance(){
         return currencyUSD.getAmount();
+    }
+    public double getRMBBalance(){
+        return currencyRMB.getAmount();
+    }
+    public double getEUROBalance(){
+        return currencyEURO.getAmount();
+    }
+
+    public void addUSDBalance(double amount){
+        currencyUSD.setAmount( currencyUSD.getAmount()  + amount);
+    }
+    public void addEUROBalance(double amount){
+        currencyEURO.setAmount( currencyEURO.getAmount()  + amount);
+    }
+    public void addRMBBalance(double amount){
+        currencyRMB.setAmount( currencyRMB.getAmount()  + amount);
     }
 
 }

@@ -1,3 +1,2 @@
 personnelID/accID/BalanceUSD/HoldingStocks
-1 1 6000.0 [{"APPL",
-15 2 0 []
+1 1 2249.48 AAPL-100-149.10,MSFT-100-250.0,MSFT-1-250.52

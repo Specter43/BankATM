@@ -11,7 +11,7 @@ public class AccountChecking extends Account {
     private CurrencyRMB rmbBalance;
 
 
-    public AccountChecking(String id,double usd, double euro, double rmb) {
+    public AccountChecking(int id,double usd, double euro, double rmb) {
         super(id);
         usdBalance = new CurrencyUSD(usd);
         euroBalance = new CurrencyEURO(euro);

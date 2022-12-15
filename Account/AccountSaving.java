@@ -5,7 +5,7 @@ public class AccountSaving extends Account {
     private final double minimumBalanceToKeepSecurity = 2500.0;
     private final double highBalanceCap= 5000.0;
 
-    public AccountSaving(String ID) {
+    public AccountSaving(int ID) {
         super(ID);
     }
 

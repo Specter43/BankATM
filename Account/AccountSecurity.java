@@ -16,7 +16,7 @@ public class AccountSecurity extends Account {
 
     private HashMap<String, Double>spending;
 
-    public AccountSecurity(String ID) {
+    public AccountSecurity(int ID) {
         super(ID);
     }
 

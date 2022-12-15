@@ -16,8 +16,8 @@ public class AccountSecurity extends Account {
 
     private HashMap<String, Double>spending;
 
-    public AccountSecurity(int ID) {
-        super(ID);
+    public AccountSecurity(int ID,String personnelID,double amountUSD, List<Stock> stocks) {
+        super(ID,personnelID);
     }
 
     @Override

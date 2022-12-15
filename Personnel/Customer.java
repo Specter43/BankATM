@@ -2,7 +2,11 @@ package Personnel;
 
 import Account.*;
 import Input.FileOperator;
+import Service.HoldingStock;
+import Service.Stock;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +28,13 @@ public class Customer extends Personnel {
         collateral = true;
         findAllAccounts(this);
     }
+    public AccountChecking getChecking(){
+        return (AccountChecking) accounts.get("Checking");
+    }
+    public AccountSaving getSaving(){
+        return (AccountSaving) accounts.get("Saving");
+    }
+
 
     public void findAllAccounts(Customer customer) {
         FileOperator fileOperator = new FileOperator();
@@ -35,48 +46,47 @@ public class Customer extends Personnel {
         List<Integer> lines = new ArrayList<>();
         List<String> accountIDs= new ArrayList<>();
         for(int i = 0 ; i <personIDs.size(); i++){
-            if(personIDs.get(i).equals(customer.getName())){
-                accountIDs.add(  persons.get("AccountID").get(i));
+            System.out.println("account IDs from Personnel.txt:" + persons.get("accountID").get(i)+"personnelID IDs from Personnel.txt:" + persons.get("ID").get(i));
+            if(personIDs.get(i).equals(Integer.toString( customer.getID()))){
+                System.out.println( "Added account to look for:"+persons.get("accountID").get(i));
+                accountIDs.add(  persons.get("accountID").get(i));
             }
         }
         AccountChecking checking = null;
         for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-            if(accountIDs.contains(checkings.get("accID").get(i))){
-                checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
+            System.out.println("checking id:" + checkings.get("accID").get(i) + "personnelID:" + checkings.get("personnelID").get(i));
+            if(accountIDs.contains(checkings.get("accID").get(i)) && checkings.get("personnelID").get(i).equals(customer.getIDString())){
+                checking = new AccountChecking(Integer.parseInt(checkings.get("accID").get(i)),checkings.get("personnelID").get(i),Double.parseDouble( checkings.get("BalanceUSD").get(i))
                         ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
                 break;
             }
         }
-        AccountChecking saving= null;
-//        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-//            if(accountIDs.contains(checkings.get("accID").get(i))){
-//                saving= new AccountSaving(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-//                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
-//                break;
-//            }
-//        }
-//        AccountChecking security = null;
-//        for(int i = 0 ; i < checkings.get("accID").size(); i++  ){
-//            if(accountIDs.contains(checkings.get("accID").get(i))){
-//                security= new AccountSecurity(Integer.parseInt(checkings.get("accID").get(i)),Double.parseDouble( checkings.get("BalanceUSD").get(i))
-//                        ,Double.parseDouble( checkings.get("BalanceEURO").get(i)),Double.parseDouble( checkings.get("BalanceRMB").get(i)));
-//                break;
-//            }
-//        }
-//        customer.accounts = new HashMap<String, Account>();
-//        customer.accounts.put("Checking", checking);
-//        customer.accounts.put("Savings", saving);
-//        customer.accounts.put("Security", security);
+        AccountSaving saving  = null;
+        for(int i = 0 ; i < savings.get("accID").size(); i++  ){
+            System.out.println("saving id:" + savings.get("accID").get(i) + "personnelID:" + savings.get("personnelID").get(i));
+            if(accountIDs.contains(savings.get("accID").get(i)) && savings.get("personnelID").get(i).equals(customer.getIDString())){
+                System.out.println( "saving id: " + (savings.get("accID").get(i)));
+                saving= new AccountSaving(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
+                        ,Double.parseDouble( savings.get("BalanceEURO").get(i)),Double.parseDouble( savings.get("BalanceRMB").get(i)));
+                break;
+            }
+        }
+
+
+        customer.accounts = new HashMap<String, Account>();
+        customer.accounts.put("Checking", checking);
+        customer.accounts.put("Saving", saving);
+        customer.accounts.put("Security", null);
     }
 
-    public static boolean createAccount(String accountType, int ID) {
+    public static boolean createAccount(String accountType, int personnelID) {
         if(accountType.equals("checking")){
-            return putNewAccountIntoCheckingOrSavingTxt("Checking", ID);
+            return putNewAccountIntoCheckingOrSavingTxt("Checking", personnelID);
         }else if(accountType.equals("saving")){
-            return putNewAccountIntoCheckingOrSavingTxt("Saving", ID);
+            return putNewAccountIntoCheckingOrSavingTxt("Saving", personnelID);
         }else if(accountType.equals("security")){
-            if(!checkAccountExist("Account/SecurityAccounts.txt", ID)){
-            return putNewAccountIntoSecurityTxt("Account/SecurityAccounts.txt", ID);
+            if(!checkAccountExist("Account/SecurityAccounts.txt", personnelID)){
+            return putNewAccountIntoSecurityTxt("Account/SecurityAccounts.txt", personnelID);
             }
         }else{
             System.out.println("Invalid accountType");
@@ -85,7 +95,7 @@ public class Customer extends Personnel {
     }
 
 
-    public boolean requestLoan(double amount) {
+    public static boolean requestLoan(double amount, int personnelID) {
         double interestRate = 0.0;
         if(amount < 500.0){
             interestRate = 0.05;
@@ -94,14 +104,13 @@ public class Customer extends Personnel {
         }else{
             interestRate = 0.09;
         }
-        if(isCollateral()){
+        if(isCollateral(personnelID)){
             try{
                 FileWriter fw = new FileWriter("Service/Loans.txt", true);
                 BufferedWriter bw = new BufferedWriter(fw);
-                int id = super.getID();
-                bw.write("\n"+id+" "+amount+" "+interestRate);
+                bw.write("\n"+personnelID+" "+amount+" "+interestRate);
                 bw.close();
-                setCustomerCollateralFalse();
+                setCustomerCollateralFalse(personnelID);
                 return true;
             }catch (Throwable e){
                 e.printStackTrace();
@@ -127,35 +136,81 @@ public class Customer extends Personnel {
         }
     }
 
-    public static boolean closeCheckingAccount(int ID){
+    public static boolean closeCheckingAccount(int personnelID){
         double amountUSD = 0;
         double amountEURO = 0;
         double amountRMB = 0;
-        if(hasAccount(ID,"Account/CheckingAccounts.txt")){
+        if(hasAccount(personnelID,"Account/CheckingAccounts.txt")){
             //if checking account has less than 50, can't close, because we need to charge closing account 50$.
             FileOperator fileOperator = new FileOperator();
+            int accountID = 0;
             HashMap<String, List<String>> outputs = fileOperator.readFile("Account/CheckingAccounts.txt");
             for(int i =0; i<outputs.get("personnelID").size(); i++){
-                if(outputs.get("personnelID").get(i).equals(Integer.toString(ID))){
+                if(outputs.get("personnelID").get(i).equals(Integer.toString(personnelID))){
                     if(Double.parseDouble(outputs.get("BalanceUSD").get(i)) < 50){
                         System.out.println("Your checking account's USD balance is less than 50 and can't close your account, because we need to charge you 50$ to close your account");
                         return false;
                     }else{
+                        accountID = Integer.parseInt(outputs.get("accID").get(i));
                         amountUSD = Double.parseDouble(outputs.get("BalanceUSD").get(i));
                         amountEURO = Double.parseDouble(outputs.get("BalanceEURO").get(i));
                         amountRMB = Double.parseDouble(outputs.get("BalanceRMB").get(i));
                     }
                 }
             }
-            deleteTheAccountFromFile(ID,"Account/CheckingAccounts.txt");
-            addOneTransaction(ID,"withdrawUSD-for-closing",amountUSD-50);
-            addOneTransaction(ID,"withdrawEURO-for-closing",amountEURO);
-            addOneTransaction(ID,"withdrawRMB-for-closing",amountRMB);
-            addOneTransaction(ID,"delete-checking-account",0);
+            deleteTheAccountFromFile(personnelID,"Account/CheckingAccounts.txt");
+            deleteTheAccountFromPersonnelFile(personnelID, accountID);
+            addOneTransaction(personnelID,"withdrawUSD-for-closing",amountUSD-50);
+            addOneTransaction(personnelID,"withdrawEURO-for-closing",amountEURO);
+            addOneTransaction(personnelID,"withdrawRMB-for-closing",amountRMB);
+            addOneTransaction(personnelID,"delete-checking-account",0);
             return true;
         }else{
             System.out.println("This customer doesn't have checking account");
             return false;
+        }
+    }
+
+    private static void deleteTheAccountFromPersonnelFile(int personnelID, int accountID) {
+        String fileName = "Personnel/Personnels.txt";
+        try {
+            StringBuffer inputBuffer = new StringBuffer();
+            File file = new File(fileName);
+            Scanner input = new Scanner(file);
+            String line;
+            if(input.hasNextLine()){ //add first line
+                line = input.nextLine();
+                inputBuffer.append(line);
+                inputBuffer.append('\n');
+            }
+            while(true){
+                if(input.hasNextLine()){
+                    line = input.nextLine(); //if now last line
+                    String[] splitLine = line.split("\\s+");
+                    String newLine;
+                    if((splitLine[0].equals(Integer.toString(personnelID))) && (splitLine[3].equals(Integer.toString(accountID)))) { //The account is not our account, we add it back to the file. If it is the account we want to delete, we ignore it.
+
+                    }else {
+                        newLine = splitLine[0] + " " + splitLine[1] + " " + splitLine[2] + " " + splitLine[3];
+                        if (input.hasNextLine()) {
+                            inputBuffer.append(newLine);
+                            inputBuffer.append('\n');
+                        } else {
+                            inputBuffer.append(newLine);
+                            break;
+                        }
+                    }
+                }else{ //if now the last line is the account we look for:
+                        break;
+                }
+            }
+            input.close();
+            FileOutputStream fileOut = new FileOutputStream(fileName);
+            fileOut.write(inputBuffer.toString().trim().getBytes());
+            fileOut.close();
+            System.out.println("Finish updating personnel for closing account");
+        }catch (Exception e){
+            System.out.println("Problem reading file");
         }
     }
 
@@ -385,15 +440,8 @@ public class Customer extends Personnel {
                     String newLine;
                     if(!(splitLine[0].equals(Integer.toString(ID)))) { //The account is not our account, we add it back to the file. If it is the account we want to delete, we ignore it.
                         newLine = splitLine[0] + " " + splitLine[1] + " " + splitLine[2] + " " + splitLine[3] + " " + splitLine[4];
-                        if (input.hasNextLine()) {
-                            inputBuffer.append(newLine);
-                            inputBuffer.append('\n');
-                        } else {
-                            inputBuffer.append(newLine);
-                            break;
-                        }
-                    }else{ //if now the last line is the account we look for:
-                        break;
+                        inputBuffer.append(newLine);
+                        inputBuffer.append('\n');
                     }
                 }else{
                     break;
@@ -552,7 +600,7 @@ public class Customer extends Personnel {
 
 
 
-    private static boolean putNewAccountIntoSecurityTxt(String fileName, int ID){
+    private static boolean putNewAccountIntoSecurityTxt(String fileName, int personnelID){
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> accounts = fileOperator.readFile(fileName);
         try{
@@ -562,9 +610,10 @@ public class Customer extends Personnel {
             if(accounts.get("accID").size() != 0){
                 accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))+1;
             }
-            bw.write("\n"+ID+" "+accID+" "+(-50.0)+" "+"[]");
+            bw.write("\n"+personnelID+" "+accID+" "+(-50.0)+" "+"[]");
             bw.close();
             System.out.println("Successfully added new account");
+            putNewAccountIntoPersonnel(personnelID, accID);
             return true;
         }catch (Throwable e){
             e.printStackTrace();
@@ -573,10 +622,10 @@ public class Customer extends Personnel {
     }
 
 
-    public void setCustomerCollateralFalse() {
+    public static void setCustomerCollateralFalse(int personnelID) {
         try {
             StringBuffer inputBuffer = new StringBuffer();
-            File file = new File("Personnel/Personnels.txt");
+            File file = new File("Service/collateral.txt");
             Scanner input = new Scanner(file);
             String line;
             if(input.hasNextLine()){
@@ -589,10 +638,10 @@ public class Customer extends Personnel {
                     line = input.nextLine();
                     String[] splitLine = line.split("\\s+");
                     String newLine;
-                    if(splitLine[1].equals(super.getName())) {
-                        newLine = splitLine[0] + " " + splitLine[1] + " " + splitLine[2] + " " + "false" + " " + splitLine[4];
+                    if(splitLine[0].equals(Integer.toString(personnelID))) {
+                        newLine = splitLine[0] + " " + splitLine[1] +" "+"false";
                     }else{
-                        newLine = splitLine[0] + " " + splitLine[1] + " " + splitLine[2] + " " + splitLine[3] + " " + splitLine[4];
+                        newLine = splitLine[0] + " " + splitLine[1] + " " + splitLine[2];
                     }
                     if(input.hasNextLine()){//not the last line
                         inputBuffer.append(newLine);
@@ -606,16 +655,17 @@ public class Customer extends Personnel {
                 }
             }
             input.close();
-            FileOutputStream fileOut = new FileOutputStream("Personnel/Personnels.txt");
+            FileOutputStream fileOut = new FileOutputStream("Service/collateral.txt");
             fileOut.write(inputBuffer.toString().getBytes());
             fileOut.close();
+            System.out.println("Finished updating Service/collateral.txt");
         }catch (Exception e){
             System.out.println("Problem reading file");
         }
     }
 
 
-    private static boolean putNewAccountIntoCheckingOrSavingTxt(String accountType, int ID){
+    private static boolean putNewAccountIntoCheckingOrSavingTxt(String accountType, int personnelID){
         String fileName = "";
         if(accountType.equals("Checking")){
             fileName = "Account/CheckingAccounts.txt";
@@ -627,7 +677,7 @@ public class Customer extends Personnel {
         }
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> accounts = fileOperator.readFile(fileName);
-        if(accounts.get("personnelID").contains(String.valueOf(ID))){
+        if(accounts.get("personnelID").contains(String.valueOf(personnelID))){
             System.out.println("The customer already has this type of account");
             return false;
         }else{
@@ -638,14 +688,40 @@ public class Customer extends Personnel {
                 if(accounts.get("accID").size() != 0){
                     accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))+1;
                 }
-                bw.write("\n"+ID+" "+accID+" "+(-50.0)+" "+0+" "+0);
+                bw.write("\n"+personnelID+" "+accID+" "+(-50.0)+" "+0+" "+0);
                 bw.close();
                 System.out.println("Successfully added new account");
+                putNewAccountIntoPersonnel(personnelID, accID);
                 return true;
             }catch (Throwable e){
                 e.printStackTrace();
                 return false;
             }
+        }
+    }
+
+    public static boolean putNewAccountIntoPersonnel(int personnelID, int AccountID){
+        String fileName = "Personnel/Personnels.txt";
+        try{
+            FileOperator fileOperator = new FileOperator();
+            String name = "";
+            String pin = "";
+            HashMap<String, List<String>> outputs = fileOperator.readFile(fileName);
+            for(int i = 0; i<outputs.get("ID").size(); i++){
+                if(outputs.get("ID").get(i).equals(Integer.toString(personnelID))){
+                    name = outputs.get("name").get(i);
+                    pin = outputs.get("PIN").get(i);
+                }
+            }
+            FileWriter fw = new FileWriter(fileName, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("\n"+personnelID+" "+name+" "+pin+" "+AccountID);
+            bw.close();
+            System.out.println("Successfully write new account info into personnel.txt");
+            return true;
+        }catch (Throwable e){
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -661,13 +737,13 @@ public class Customer extends Personnel {
 
     }
 
-    private boolean isCollateral(){
+    private static boolean isCollateral(int personnelID){
         FileOperator fileOperator = new FileOperator();
-        HashMap<String, List<String>> accounts = fileOperator.readFile("Personnel/Personnels.txt");
-        for(int i = 0; i<accounts.get("name").size(); i++){
-            if(accounts.get("name").get(i).equals(super.getName())){ //if we found this customer
-//                System.out.println("Found the person: "+accounts.get("name").get(i));
-//                System.out.println("Collateral: "+accounts.get("collateral").get(i));
+        HashMap<String, List<String>> accounts = fileOperator.readFile("Service/collateral.txt");
+        for(int i = 0; i<accounts.get("personnelID").size(); i++){
+            if(accounts.get("personnelID").get(i).equals(Integer.toString(personnelID))){ //if we found this customer
+                System.out.println("Found the person: "+accounts.get("name").get(i));
+                System.out.println("Collateral: "+accounts.get("collateral").get(i));
                 if(accounts.get("collateral").get(i).equals("true")){ //and this customer is collateral
                     return true;
                 }

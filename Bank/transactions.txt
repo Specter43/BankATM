@@ -35,3 +35,164 @@ this-day sam 1 withdrawUSD-for-closing 400.0
 this-day sam 1 withdrawEURO-for-closing 400.0
 this-day sam 1 withdrawRMB-for-closing 400.0
 this-day sam 1 delete-checking-account 0.0
+this-day sam 1 BalanceUSD-withdraw-checking 850.0
+this-day sam 1 BalanceUSD-withdraw-checking 850.0
+this-day sam 1 BalanceUSD-withdraw-checking 950.0
+this-day sam 1 BalanceUSD-withdraw-checking 50.0
+this-day sam 1 BalanceUSD-withdraw-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 950.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceUSD-withdraw-checking 50.0
+this-day sam 1 BalanceEURO-withdraw-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceEURO-deposit-checking 150.0
+this-day sam 1 BalanceRMB-deposit-checking 1950.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceEURO-deposit-checking 950.0
+this-day sam 1 BalanceEURO-deposit-checking 950.0
+this-day sam 1 BalanceUSD-deposit-checking 950.0
+this-day sam 1 BalanceEURO-deposit-checking 950.0
+this-day sam 1 BalanceUSD-deposit-checking 950.0
+this-day sam 1 BalanceUSD-deposit-checking 19950.0
+this-day sam 1 BalanceUSD-deposit-saving 1000.0
+this-day sam 1 BalanceEURO-deposit-saving 1000.0
+this-day sam 1 BalanceEURO-deposit-checking 50.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 23750.0
+this-day sam 1 withdrawEURO-for-closing 3950.0
+this-day sam 1 withdrawRMB-for-closing 2950.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 50.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day  1 withdrawUSD-for-closing 50.0
+this-day  1 withdrawEURO-for-closing 0.0
+this-day  1 withdrawRMB-for-closing 0.0
+this-day  1 delete-checking-account 0.0
+this-day  1 withdrawUSD-for-closing 50.0
+this-day  1 withdrawEURO-for-closing 0.0
+this-day  1 withdrawRMB-for-closing 0.0
+this-day  1 delete-checking-account 0.0
+this-day  1 withdrawUSD-for-closing 50.0
+this-day  1 withdrawEURO-for-closing 0.0
+this-day  1 withdrawRMB-for-closing 0.0
+this-day  1 delete-checking-account 0.0
+this-day  1 withdrawUSD-for-closing 50.0
+this-day  1 withdrawEURO-for-closing 0.0
+this-day  1 withdrawRMB-for-closing 0.0
+this-day  1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 50.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 50.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceEURO-deposit-checking 950.0
+this-day sam 1 withdrawUSD-for-closing 1000.0
+this-day sam 1 withdrawEURO-for-closing 950.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 withdrawUSD-for-closing 950.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 BalanceUSD-deposit-checking 950.0
+this-day sam 1 withdrawUSD-for-closing 850.0
+this-day sam 1 withdrawEURO-for-closing 0.0
+this-day sam 1 withdrawRMB-for-closing 0.0
+this-day sam 1 delete-checking-account 0.0
+this-day sam 1 BalanceUSD-deposit-checking 50.0
+this-day sam 1 BalanceUSD-deposit-checking 950.0
+this-day sam 1 BalanceUSD-withdraw-checking 49.0
+this-day sam 1 BalanceUSD-withdraw-saving 50.0
+this-day sam 1 BalanceUSD-withdraw-saving 50.0
+this-day sam 1 BalanceUSD-withdraw-saving 50.0
+this-day sam 1 BalanceUSD-deposit-saving 100.0
+this-day sam 1 BalanceEURO-withdraw-saving 50.0
+this-day sam 1 BalanceUSD-deposit-saving 100.0
+this-day sam 1 BalanceUSD-deposit-saving 100.0
+this-day sam 1 BalanceUSD-deposit-saving 5000.0
+this-day sam 1 BalanceUSD-withdraw-saving 50.0
+this-day sam 1 transferFunds 100.0

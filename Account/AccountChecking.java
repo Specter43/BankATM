@@ -6,16 +6,13 @@ import Currency.CurrencyUSD;
 
 public class AccountChecking extends Account {
     private static double transactionFee = 50;
-    private CurrencyUSD usdBalance;
-    private CurrencyEURO euroBalance;
-    private CurrencyRMB rmbBalance;
 
 
-    public AccountChecking(int id,double usd, double euro, double rmb) {
-        super(id);
-        usdBalance = new CurrencyUSD(usd);
-        euroBalance = new CurrencyEURO(euro);
-        rmbBalance = new CurrencyRMB(rmb);
+    public AccountChecking(int id,String pID,double usd, double euro, double rmb) {
+        super(id,pID);
+        depositUSD(usd);
+        depositEURO(euro);
+        depositRMB(rmb);
     }
 
 

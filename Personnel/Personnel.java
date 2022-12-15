@@ -19,6 +19,10 @@ public abstract class Personnel {
         return ID;
     }
 
+    public String getIDString(){
+        return Integer.toString(ID);
+    }
+
     public void setID(int ID) {
         this.ID = ID;
     }

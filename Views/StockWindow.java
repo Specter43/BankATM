@@ -203,7 +203,7 @@ public class StockWindow extends JFrame {
                                                             "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_OPTION);
                                                     if (input == 0) {
                                                         // Update front end
-                                                        contentSell.removeLine(finalFound);
+                                                        contentSell.removeLine(contentSell.getInfoSections().size()-1);
                                                         contentSell.updateLines();
                                                         // Change text file
                                                         try {
@@ -268,79 +268,81 @@ public class StockWindow extends JFrame {
                     if (stockHoldings.get("HoldingStocks").size() > 0) {
                         String[] holdingStocks = stockHoldings.get("HoldingStocks").get(i).split(",");
                         for (String stock : holdingStocks) {
-                            String[] stockInfo = stock.split("-");
-                            String stockName = stockInfo[0];
-                            String stockHoldingShares = stockInfo[1];
-                            String stockHoldingPrice = stockInfo[2];
+                            if (!stock.equals("[]")) {
+                                String[] stockInfo = stock.split("-");
+                                String stockName = stockInfo[0];
+                                String stockHoldingShares = stockInfo[1];
+                                String stockHoldingPrice = stockInfo[2];
 
-                            // Add bought stocks
-                            allBoughtStocks.add(new ArrayList<Object>(){{add(stockName); add(Integer.parseInt(stockHoldingShares)); add(Double.parseDouble(stockHoldingPrice));}});
+                                // Add bought stocks
+                                allBoughtStocks.add(new ArrayList<Object>(){{add(stockName); add(Integer.parseInt(stockHoldingShares)); add(Double.parseDouble(stockHoldingPrice));}});
 
-                            // Calculate unrealized profit
-                            double unrealizedProfit = calculateUnrealizedProfit();
-                            unrealizedProfitLabel.setText("<html>Unrealized Profit:<br/>" + unrealizedProfit + "</html>");
+                                // Calculate unrealized profit
+                                double unrealizedProfit = calculateUnrealizedProfit();
+                                unrealizedProfitLabel.setText("<html>Unrealized Profit:<br/>" + unrealizedProfit + "</html>");
 
-                            // Add sellable stocks
-                            contentSell.addOneLine(50, 10, 1, sellSections, sellButton);
-                            contentSell.getInfoSections().get(found).get("Name").setText(stockName);
-                            contentSell.getInfoSections().get(found).get("Share").setText(stockHoldingShares);
-                            contentSell.getInfoSections().get(found).get("Price").setText(stockHoldingPrice);
-                            contentSell.getInfoSections().get(found).get("Tradable").setText(Tradability.get(stockName));
+                                // Add sellable stocks
+                                contentSell.addOneLine(50, 10, 1, sellSections, sellButton);
+                                contentSell.getInfoSections().get(found).get("Name").setText(stockName);
+                                contentSell.getInfoSections().get(found).get("Share").setText(stockHoldingShares);
+                                contentSell.getInfoSections().get(found).get("Price").setText(stockHoldingPrice);
+                                contentSell.getInfoSections().get(found).get("Tradable").setText(Tradability.get(stockName));
 
-                            int finalFound = found;
-                            contentSell.getActions().get(found).get("Sell").addMouseListener(new MouseAdapter() {
-                                @Override
-                                public void mouseClicked(MouseEvent e) {
-                                    super.mouseClicked(e);
-                                    // Actually Sell
-                                    if (Tradability.get(stockName).equals("true")) {
-                                        int input = JOptionPane.showConfirmDialog(null,
-                                                "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_OPTION);
-                                        if (input == 0) {
-                                            // Update front end
-                                            contentSell.removeLine(finalFound);
-                                            contentSell.updateLines();
-                                            // Change text file
-                                            try {
-                                                List<String> lines = Files.readAllLines(Paths.get("Account/SecurityAccounts.txt"));
-                                                for (int j = 0; j < lines.size(); j++) {
-                                                    String line = lines.get(j);
-                                                    String[] securityAccountInfo = line.split("\\s+");
-                                                    if (securityAccountInfo[0].equals(customerID)) {
-                                                        String[] holdingStocksInfo = securityAccountInfo[3].split(",");
-                                                        securityAccountInfo[2] = Double.toString(Double.parseDouble(securityAccountInfo[2]) + Integer.parseInt(stockHoldingShares) * Double.parseDouble(stockHoldingPrice));
-                                                        // Update balance
-                                                        balanceLabel.setText("<html>Balance USD:<br/>" + securityAccountInfo[2] + "</html>");
-                                                        ArrayList<String> newHoldingStocks = new ArrayList<>();
-                                                        for (int k = 0; k < holdingStocksInfo.length; k++) {
-                                                            if (k != finalFound) {
-                                                                newHoldingStocks.add(holdingStocksInfo[k]);
+                                int finalFound = found;
+                                contentSell.getActions().get(found).get("Sell").addMouseListener(new MouseAdapter() {
+                                    @Override
+                                    public void mouseClicked(MouseEvent e) {
+                                        super.mouseClicked(e);
+                                        // Actually Sell
+                                        if (Tradability.get(stockName).equals("true")) {
+                                            int input = JOptionPane.showConfirmDialog(null,
+                                                    "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_OPTION);
+                                            if (input == 0) {
+                                                // Update front end
+                                                contentSell.removeLine(finalFound);
+                                                contentSell.updateLines();
+                                                // Change text file
+                                                try {
+                                                    List<String> lines = Files.readAllLines(Paths.get("Account/SecurityAccounts.txt"));
+                                                    for (int j = 0; j < lines.size(); j++) {
+                                                        String line = lines.get(j);
+                                                        String[] securityAccountInfo = line.split("\\s+");
+                                                        if (securityAccountInfo[0].equals(customerID)) {
+                                                            String[] holdingStocksInfo = securityAccountInfo[3].split(",");
+                                                            securityAccountInfo[2] = Double.toString(Double.parseDouble(securityAccountInfo[2]) + Integer.parseInt(stockHoldingShares) * Double.parseDouble(stockHoldingPrice));
+                                                            // Update balance
+                                                            balanceLabel.setText("<html>Balance USD:<br/>" + securityAccountInfo[2] + "</html>");
+                                                            ArrayList<String> newHoldingStocks = new ArrayList<>();
+                                                            for (int k = 0; k < holdingStocksInfo.length; k++) {
+                                                                if (k != finalFound) {
+                                                                    newHoldingStocks.add(holdingStocksInfo[k]);
+                                                                }
                                                             }
+                                                            String newLine = securityAccountInfo[0] + " " + securityAccountInfo[1] + " " + securityAccountInfo[2] + " " + String.join(",", newHoldingStocks);
+                                                            fileOperator.changeLine("Account/SecurityAccounts.txt", j-1, newLine);
                                                         }
-                                                        String newLine = securityAccountInfo[0] + " " + securityAccountInfo[1] + " " + securityAccountInfo[2] + " " + String.join(",", newHoldingStocks);
-                                                        fileOperator.changeLine("Account/SecurityAccounts.txt", j-1, newLine);
                                                     }
+                                                } catch (Exception ex) {
+
                                                 }
-                                            } catch (Exception ex) {
+                                                // Calculate Realized Profit
+                                                List<Object> stockToSell = allBoughtStocks.remove(finalFound);
+                                                realizedProfit += (int) stockToSell.get(1) * allCurrentStocks.get(stockToSell.get(0)) - (int) stockToSell.get(1) * (double) stockToSell.get(2);
+                                                realizedProfitLabel.setText("<html>Realized Profit:<br/>" + realizedProfit + "</html>");
 
+                                                // Calculate Unrealized Profit
+                                                double unrealizedProfit = calculateUnrealizedProfit();
+                                                unrealizedProfitLabel.setText("<html>Unrealized Profit:<br/>" + unrealizedProfit + "</html>");
                                             }
-                                            // Calculate Realized Profit
-                                            List<Object> stockToSell = allBoughtStocks.remove(finalFound);
-                                            realizedProfit += (int) stockToSell.get(1) * allCurrentStocks.get(stockToSell.get(0)) - (int) stockToSell.get(1) * (double) stockToSell.get(2);
-                                            realizedProfitLabel.setText("<html>Realized Profit:<br/>" + realizedProfit + "</html>");
-
-                                            // Calculate Unrealized Profit
-                                            double unrealizedProfit = calculateUnrealizedProfit();
-                                            unrealizedProfitLabel.setText("<html>Unrealized Profit:<br/>" + unrealizedProfit + "</html>");
+                                        }
+                                        // Not tradable
+                                        else {
+                                            JOptionPane.showMessageDialog(null, "This stock is not tradable at this moment.");
                                         }
                                     }
-                                    // Not tradable
-                                    else {
-                                        JOptionPane.showMessageDialog(null, "This stock is not tradable at this moment.");
-                                    }
-                                }
-                            });
-                            found++;
+                                });
+                                found++;
+                            }
                         }
                     }
                 }

@@ -44,6 +44,9 @@ public class StockWindow extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 previous.setVisible(true);
+                if(previous instanceof SpecificCustomerWindow){
+                    ((SpecificCustomerWindow)previous).updateSecurityDisplay();
+                }
                 setVisible(false);
             }
         });

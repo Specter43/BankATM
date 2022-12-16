@@ -81,7 +81,7 @@ public class Customer extends Personnel {
             if(accountIDs.contains(securities.get("accID").get(i)) && securities.get("personnelID").get(i).equals(customer.getIDString())){
                 System.out.println( "security id found : " + (securities.get("accID").get(i)));
                 //security = new AccountSecurity()
-                security= new AccountSecurity(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
+                security= new AccountSecurity(Integer.parseInt(securities.get("accID").get(i)),securities.get("personnelID").get(i),Double.parseDouble( securities.get("BalanceUSD").get(i))
                         ,new ArrayList<>());
                 break;
             }
@@ -404,18 +404,18 @@ public class Customer extends Personnel {
         HashMap<String, List<String>> outputs = fileOperator.readFile("Account/SavingsAccounts.txt");
         for(int i = 0; i<outputs.get("personnelID").size();i++){
             if(outputs.get("personnelID").get(i).equals(Integer.toString(personnelID))){
-                if(Double.parseDouble(outputs.get("BalanceUSD").get(i))<5000){
-                    if(amount > 1000){
+                if(Double.parseDouble(outputs.get("BalanceUSD").get(i))<5000 && amount > 1000){
                         return false;
-
                     }
-                }
                 if(Double.parseDouble(outputs.get("BalanceUSD").get(i)) < amount){
                     System.out.println("The saving account doesn't have that much money to transfer");
                     return false;
                 }
                 if(Double.parseDouble(outputs.get("BalanceUSD").get(i)) - amount < 2500){
+                    System.out.println("The security account will be less than 2500, can't transfer.");
                     return false;
+                }else{
+                    System.out.println("Can transfer");
                 }
             }
         }

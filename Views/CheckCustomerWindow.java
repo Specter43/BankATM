@@ -24,9 +24,11 @@ public class CheckCustomerWindow extends JFrame {
     private JPanel eastPanel;
     private JPanel southPanel;
     private JButton backButton;
+    private JFrame previous;
     private JPanel centerPanel;
 
     public CheckCustomerWindow(JFrame previous, String checkerMode, String customerName) {
+        this.previous = previous;
         previous.setVisible(false);
         this.checkMode = checkerMode;
         this.customerName = customerName;
@@ -49,15 +51,15 @@ public class CheckCustomerWindow extends JFrame {
         ButtonList content =  new ButtonList(1000,600, new Color(57, 155, 255));
         ArrayList<String> sections = new ArrayList<>();
         ArrayList<String> buttons= new ArrayList<>();
-        sections.add("ID");
-        sections.add("Name");
-        sections.add("Account");
         FileOperator fileOperator = new FileOperator();
         HashMap<String, List<String>> customers = fileOperator.readFile("Personnel/Personnels.txt");
         centerPanel.setLayout(new GridLayout(1,1));
 
         if (checkerMode.equals("Specific")) {
             int found = 0;
+            sections.add("ID");
+            sections.add("Name");
+            sections.add("Account");
             content.initLayout(50,10, sections, buttons);
             for (int i = 0; i < customers.get("ID").size(); i++) {
                 if (customers.get("name").get(i).equals(customerName)) {
@@ -72,9 +74,13 @@ public class CheckCustomerWindow extends JFrame {
             }
             if (found == 0) {
                 JOptionPane.showMessageDialog(null, "No such customer exist.");
+                previous.setVisible(true);
             }
         }
         else if (checkerMode.equals("All")) {
+            sections.add("ID");
+            sections.add("Name");
+            sections.add("Account");
             content.initLayout(50,10, sections, buttons);
             for (int i = 0; i < customers.get("ID").size(); i++) {
                 content.addOneLine(50, 10,1, sections, buttons);
@@ -86,6 +92,8 @@ public class CheckCustomerWindow extends JFrame {
             setVisible(true);
         }
         else if (checkerMode.equals("Poor")){
+            sections.add("ID");
+            sections.add("Account");
             sections.add("Owe USD");
             sections.add("Owe EURO");
             sections.add("Owe RMB");
@@ -95,35 +103,29 @@ public class CheckCustomerWindow extends JFrame {
             HashMap<String, List<String>> securityAccounts = fileOperator.readFile("Account/SecurityAccounts.txt");
             int found = 0;
             for (int i = 0; i < checkingAccounts.get("personnelID").size(); i++) {
-                String currentAccID = customers.get("accountID").get(i);
-                for (String accID : checkingAccounts.get("accID")) {
-                    if (currentAccID.equals(accID)) {
-                        double currentUSD = Double.parseDouble(checkingAccounts.get("BalanceUSD").get(i));
-                        double currentEURO = Double.parseDouble(checkingAccounts.get("BalanceEURO").get(i));
-                        double currentRMB = Double.parseDouble(checkingAccounts.get("BalanceRMB").get(i));
-                        if (currentUSD < 0 || currentEURO < 0 || currentRMB < 0) {
-                            content.addOneLine(50, 10,1, sections, buttons);
-                            content.getInfoSections().get(found).get("ID").setText(customers.get("ID").get(found));
-                            content.getInfoSections().get(found).get("Name").setText(customers.get("name").get(found));
-                            content.getInfoSections().get(found).get("Account").setText(customers.get("accountID").get(found));
-                            if (currentUSD < 0) {
-                                content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(currentUSD));
-                            } else {
-                                content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(0));
-                            }
-                            if (currentEURO < 0) {
-                                content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(currentEURO));
-                            } else {
-                                content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(0));
-                            }
-                            if (currentRMB < 0) {
-                                content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(currentRMB));
-                            } else {
-                                content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(0));
-                            }
-                            found++;
-                        }
+                double currentUSD = Double.parseDouble(checkingAccounts.get("BalanceUSD").get(i));
+                double currentEURO = Double.parseDouble(checkingAccounts.get("BalanceEURO").get(i));
+                double currentRMB = Double.parseDouble(checkingAccounts.get("BalanceRMB").get(i));
+                if (currentUSD < 0 || currentEURO < 0 || currentRMB < 0) {
+                    content.addOneLine(50, 10, 1, sections, buttons);
+                    content.getInfoSections().get(found).get("ID").setText(checkingAccounts.get("personnelID").get(found));
+                    content.getInfoSections().get(found).get("Account").setText(checkingAccounts.get("accID").get(found));
+                    if (currentUSD < 0) {
+                        content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(currentUSD));
+                    } else {
+                        content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(0));
                     }
+                    if (currentEURO < 0) {
+                        content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(currentEURO));
+                    } else {
+                        content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(0));
+                    }
+                    if (currentRMB < 0) {
+                        content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(currentRMB));
+                    } else {
+                        content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(0));
+                    }
+                    found++;
                 }
             }
             if (found > 0) {
@@ -131,10 +133,8 @@ public class CheckCustomerWindow extends JFrame {
                 setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "No one is owing money!");
+                previous.setVisible(true);
             }
-        } else {
-
         }
-
     }
 }

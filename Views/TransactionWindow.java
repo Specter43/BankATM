@@ -22,9 +22,11 @@ public class TransactionWindow extends JFrame {
     private JPanel eastPanel;
     private JPanel southPanel;
     private JPanel centerPanel;
+    private JFrame previous;
     private JButton backButton;
 
     public TransactionWindow(JFrame previous, String checkerMode, String customerName) {
+        this.previous = previous;
         previous.setVisible(false);
         createWindow(checkerMode, customerName);
 
@@ -74,10 +76,10 @@ public class TransactionWindow extends JFrame {
                 setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "There is no transactions today.");
+                previous.setVisible(true);
             }
         } else if (checkerMode.equals("Customer")) {
             setTitle("Transactions");
-
         }
     }
 }

@@ -63,10 +63,14 @@ public class SpecificCustomerWindow extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (customer.getSaving().getUSDBalance() >= 2500) {
+                if (customer.getSaving().getUSDBalance() >= 2500 && customer.getSecurity() != null) {
                     StockWindow stockWindow = new StockWindow(current, "Customer", Integer.toString(customer.getID()));
                     setVisible(false);
-                } else {
+                }
+                else if (customer.getSecurity() == null) {
+                    JOptionPane.showMessageDialog(null, "You currently don't have a security account.");
+                }
+                else {
                     JOptionPane.showMessageDialog(null, "You don't have enough money in savings to start trading.");
                 }
             }

@@ -16,3 +16,5 @@ this-day sam 0 withdrawUSD-for-closing 9850.0
 this-day sam 0 withdrawEURO-for-closing 0.0
 this-day sam 0 withdrawRMB-for-closing 0.0
 this-day sam 0 delete-checking-account 0.0
+this-day sam 0 BalanceUSD-withdraw-saving 950.0
+this-day sam 0 transferFunds 1000.0

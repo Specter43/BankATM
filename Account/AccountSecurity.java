@@ -21,6 +21,7 @@ public class AccountSecurity extends Account {
 
     public AccountSecurity(int ID,String personnelID,double amountUSD, List<Stock> stocks) {
         super(ID,personnelID);
+        super.depositUSD(amountUSD);
     }
 
     @Override

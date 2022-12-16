@@ -81,7 +81,7 @@ public class Customer extends Personnel {
             if(accountIDs.contains(securities.get("accID").get(i)) && securities.get("personnelID").get(i).equals(customer.getIDString())){
                 System.out.println( "security id found : " + (securities.get("accID").get(i)));
                 //security = new AccountSecurity()
-                security= new AccountSecurity(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
+                security= new AccountSecurity(Integer.parseInt(securities.get("accID").get(i)),securities.get("personnelID").get(i),Double.parseDouble( securities.get("BalanceUSD").get(i))
                         ,new ArrayList<>());
                 break;
             }

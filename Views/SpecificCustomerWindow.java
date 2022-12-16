@@ -143,6 +143,12 @@ public class SpecificCustomerWindow extends JFrame{
                         CenterPanel.add(securityAccountsList,2);
                         CenterPanel.revalidate();
                         CenterPanel.repaint();
+
+                        initSaving(customerName.getSaving());
+                        CenterPanel.remove(1);
+                        CenterPanel.add(savingAccountsList,1);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
                     }
                 }
         );
@@ -302,7 +308,10 @@ public class SpecificCustomerWindow extends JFrame{
         savingSections.add("BalanceRMB");
         savingButtons.add("WithDrawl");
         savingButtons.add("Deposit");
+        if( customerName.getSecurity() != null ){
         savingButtons.add("Transfer");
+        }
+
         savingAccountsList.initLayout(50,10,savingSections,savingButtons);
         savingAccountsList.addOneLine(50,10,1,savingSections,savingButtons);
         savingAccountsList.getInfoSections().get(0).get("Account#").setText(account.getAccID());
@@ -367,7 +376,7 @@ public class SpecificCustomerWindow extends JFrame{
 
                                     initSecurity(customerName.getSecurity());
                                     CenterPanel.remove(2);
-                                    CenterPanel.add(savingAccountsList,2);
+                                    CenterPanel.add(securityAccountsList,2);
                                     CenterPanel.revalidate();
                                     CenterPanel.repaint();
 
@@ -413,12 +422,19 @@ public class SpecificCustomerWindow extends JFrame{
         current.repaint();
     }
 
-        public void initializeInfo(){
+        public void updateSecurityDisplay(){
+            customerName.findAllAccounts(customerName);
+            initSecurity(customerName.getSecurity());
+            CenterPanel.remove(2);
+            CenterPanel.add(securityAccountsList,2);
+            CenterPanel.revalidate();
+            CenterPanel.repaint();
+            current.invalidate();
+            current.revalidate();
+            current.repaint();
+            //checkingAccounts.getInfoSections().get(0).get("Account#").setText("");
 
 
-        //checkingAccounts.getInfoSections().get(0).get("Account#").setText("");
-
-
-    }
+        }
 
 }

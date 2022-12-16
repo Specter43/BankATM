@@ -345,24 +345,33 @@ public class SpecificCustomerWindow extends JFrame{
                     }
                 });
         ;
-        savingAccountsList.getActions().get(0).get("Transfer")
-                .addMouseListener(
-                        new MouseAdapter() {
-                            @Override
-                            public void mouseClicked(MouseEvent e) {
-                                super.mouseClicked(e);
-                                int amount = askForValidNumber();
-                                Customer.transferFunds(customerName.getID(),amount);
-                                customerName.findAllAccounts(customerName);
-                                initSaving(customerName.getSaving());
-                                CenterPanel.remove(1);
-                                CenterPanel.add(savingAccountsList,1);
-                                CenterPanel.revalidate();
-                                CenterPanel.repaint();
+        if( customerName.getSecurity() != null ){
+            savingAccountsList.getActions().get(0).get("Transfer")
+                    .addMouseListener(
+                            new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    super.mouseClicked(e);
+                                    int amount = askForValidNumber();
+                                    Customer.transferFunds(customerName.getID(),amount);
+                                    customerName.findAllAccounts(customerName);
+                                    initSaving(customerName.getSaving());
+                                    CenterPanel.remove(1);
+                                    CenterPanel.add(savingAccountsList,1);
+                                    CenterPanel.revalidate();
+                                    CenterPanel.repaint();
 
-                            }
-                        });
-        ;
+                                    initSecurity(customerName.getSecurity());
+                                    CenterPanel.remove(2);
+                                    CenterPanel.add(savingAccountsList,2);
+                                    CenterPanel.revalidate();
+                                    CenterPanel.repaint();
+
+                                }
+                            });
+            ;
+        }
+
 
         current.invalidate();
         current.revalidate();

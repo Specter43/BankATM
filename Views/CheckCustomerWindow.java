@@ -94,7 +94,7 @@ public class CheckCustomerWindow extends JFrame {
             HashMap<String, List<String>> savingsAccounts = fileOperator.readFile("Account/SavingsAccounts.txt");
             HashMap<String, List<String>> securityAccounts = fileOperator.readFile("Account/SecurityAccounts.txt");
             int found = 0;
-            for (int i = 0; i < customers.get("ID").size(); i++) {
+            for (int i = 0; i < checkingAccounts.get("personnelID").size(); i++) {
                 String currentAccID = customers.get("accountID").get(i);
                 for (String accID : checkingAccounts.get("accID")) {
                     if (currentAccID.equals(accID)) {
@@ -103,25 +103,25 @@ public class CheckCustomerWindow extends JFrame {
                         double currentRMB = Double.parseDouble(checkingAccounts.get("BalanceRMB").get(i));
                         if (currentUSD < 0 || currentEURO < 0 || currentRMB < 0) {
                             content.addOneLine(50, 10,1, sections, buttons);
-                            content.getInfoSections().get(i).get("ID").setText(customers.get("ID").get(i));
-                            content.getInfoSections().get(i).get("Name").setText(customers.get("name").get(i));
-                            content.getInfoSections().get(i).get("Account").setText(customers.get("accountID").get(i));
-                            found++;
+                            content.getInfoSections().get(found).get("ID").setText(customers.get("ID").get(found));
+                            content.getInfoSections().get(found).get("Name").setText(customers.get("name").get(found));
+                            content.getInfoSections().get(found).get("Account").setText(customers.get("accountID").get(found));
                             if (currentUSD < 0) {
-                                content.getInfoSections().get(i).get("Owe USD").setText(Double.toString(currentUSD));
+                                content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(currentUSD));
                             } else {
-                                content.getInfoSections().get(i).get("Owe USD").setText(Double.toString(0));
+                                content.getInfoSections().get(found).get("Owe USD").setText(Double.toString(0));
                             }
                             if (currentEURO < 0) {
-                                content.getInfoSections().get(i).get("Owe EURO").setText(Double.toString(currentEURO));
+                                content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(currentEURO));
                             } else {
-                                content.getInfoSections().get(i).get("Owe EURO").setText(Double.toString(0));
+                                content.getInfoSections().get(found).get("Owe EURO").setText(Double.toString(0));
                             }
                             if (currentRMB < 0) {
-                                content.getInfoSections().get(i).get("Owe RMB").setText(Double.toString(currentRMB));
+                                content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(currentRMB));
                             } else {
-                                content.getInfoSections().get(i).get("Owe RMB").setText(Double.toString(0));
+                                content.getInfoSections().get(found).get("Owe RMB").setText(Double.toString(0));
                             }
+                            found++;
                         }
                     }
                 }

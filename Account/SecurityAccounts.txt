@@ -1,2 +1,1 @@
 personnelID/accID/BalanceUSD/HoldingStocks
-0 10000 90998.0 

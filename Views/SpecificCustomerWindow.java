@@ -32,6 +32,7 @@ public class SpecificCustomerWindow extends JFrame{
     private JComboBox currencyBox;
     private JButton stockMarketButton;
     private JButton loanButton;
+    private JButton requestLoanButton;
 
     private ButtonList checkingAccountsList;
     private ButtonList savingAccountsList;
@@ -80,6 +81,16 @@ public class SpecificCustomerWindow extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 LoanWindow loanWindow = new LoanWindow(current, Integer.toString(customer.getID()));
+            }
+        });
+        requestLoanButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String loan = JOptionPane.showInputDialog("Enter how much of a loan you want to take:");
+                if (Double.parseDouble(loan) > 0) {
+                    Customer.requestLoan(Double.parseDouble(loan), customer.getID());
+                }
             }
         });
     }

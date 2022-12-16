@@ -34,7 +34,7 @@ public class SpecificCustomerWindow extends JFrame{
 
     private ButtonList checkingAccountsList;
     private ButtonList savingAccountsList;
-    private ButtonList securityAccounts;
+    private ButtonList securityAccountsList;
 
     public SpecificCustomerWindow(JFrame previous, String checkerMode, Customer customer) {
 

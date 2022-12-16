@@ -1,2 +1,1 @@
 personnelID/accID/BalanceUSD/HoldingStocks
-1 1003 63926.64 AAPL-100-149.10,MSFT-100-250.0,MSFT-1-250.52

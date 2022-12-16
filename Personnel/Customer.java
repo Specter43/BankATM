@@ -1,8 +1,6 @@
 package Personnel;
 
-import Account.Account;
-import Account.AccountChecking;
-import Account.AccountSaving;
+import Account.*;
 import Input.FileOperator;
 
 import java.io.BufferedWriter;
@@ -62,22 +60,35 @@ public class Customer extends Personnel {
                 break;
             }
         }
+
         AccountSaving saving  = null;
         for(int i = 0 ; i < savings.get("accID").size(); i++  ){
             System.out.println("saving id:" + savings.get("accID").get(i) + "personnelID:" + savings.get("personnelID").get(i));
             if(accountIDs.contains(savings.get("accID").get(i)) && savings.get("personnelID").get(i).equals(customer.getIDString())){
-                System.out.println( "saving id: " + (savings.get("accID").get(i)));
+                System.out.println( "saving id found : " + (savings.get("accID").get(i)));
                 saving= new AccountSaving(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
                         ,Double.parseDouble( savings.get("BalanceEURO").get(i)),Double.parseDouble( savings.get("BalanceRMB").get(i)));
                 break;
             }
         }
+        AccountSecurity security  = null;
+        for(int i = 0 ; i < securities.get("accID").size(); i++  ){
+            System.out.println("security id:" + securities.get("accID").get(i) + "personnelID:" + securities.get("personnelID").get(i));
+            if(accountIDs.contains(securities.get("accID").get(i)) && securities.get("personnelID").get(i).equals(customer.getIDString())){
+                System.out.println( "security id found : " + (securities.get("accID").get(i)));
+                //security = new AccountSecurity()
+                security= new AccountSecurity(Integer.parseInt(savings.get("accID").get(i)),savings.get("personnelID").get(i),Double.parseDouble( savings.get("BalanceUSD").get(i))
+                        ,new ArrayList<>());
+                break;
+            }
+        }
+
 
 
         customer.accounts = new HashMap<String, Account>();
         customer.accounts.put("Checking", checking);
         customer.accounts.put("Saving", saving);
-        customer.accounts.put("Security", null);
+        customer.accounts.put("Security", security);
     }
 
     public static boolean createAccount(String accountType, int personnelID) {

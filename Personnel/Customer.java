@@ -401,11 +401,16 @@ public class Customer extends Personnel {
         for(int i = 0; i<outputs.get("personnelID").size();i++){
             if(outputs.get("personnelID").get(i).equals(Integer.toString(personnelID))){
                 if(Double.parseDouble(outputs.get("BalanceUSD").get(i))<5000){
-                    System.out.println("The saving account's USD balance is less than 5000 and can't transfer");
-                    return false;
+                    if(amount > 1000){
+                        return false;
+
+                    }
                 }
                 if(Double.parseDouble(outputs.get("BalanceUSD").get(i)) < amount){
                     System.out.println("The saving account doesn't have that much money to transfer");
+                    return false;
+                }
+                if(Double.parseDouble(outputs.get("BalanceUSD").get(i)) - amount < 2500){
                     return false;
                 }
             }
@@ -618,11 +623,11 @@ public class Customer extends Personnel {
         try{
             FileWriter fw = new FileWriter(fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            int accID = 0;
+            int accID = 10000;
             if(accounts.get("accID").size() != 0){
-                accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))+1;
+                accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))-1;
             }
-            bw.write("\n"+personnelID+" "+accID+" "+(-50.0)+" "+"[]");
+            bw.write("\n"+personnelID+" "+accID+" "+0.0+" "+"[]");
             bw.close();
             System.out.println("Successfully added new account");
             putNewAccountIntoPersonnel(personnelID, accID);
@@ -696,9 +701,17 @@ public class Customer extends Personnel {
             try{
                 FileWriter fw = new FileWriter(fileName, true);
                 BufferedWriter bw = new BufferedWriter(fw);
-                int accID = 0;
-                if(accounts.get("accID").size() != 0){
-                    accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))+1;
+                int accID;
+                if(accountType.equals("Checking")){
+                    accID = 0;
+                    if(accounts.get("accID").size() != 0){
+                        accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))+1;
+                    }
+                }else{
+                    accID = 50000;
+                    if(accounts.get("accID").size() != 0){
+                        accID = Integer.parseInt(accounts.get("accID").get(accounts.get("accID").size()-1))-1;
+                    }
                 }
                 bw.write("\n"+personnelID+" "+accID+" "+(-50.0)+" "+0+" "+0);
                 bw.close();

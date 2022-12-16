@@ -63,9 +63,15 @@ public class Bank {
         try{
             FileWriter fw = new FileWriter("Personnel/Personnels.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
-            int id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
-            bw.write("\n"+id+" "+userName+" "+pin+" "+"true"+" "+"_");
+            int id = 0;
+            if(output.get("ID").size() == 0){
+                id = 0;
+            }else{
+                id = Integer.parseInt(output.get("ID").get(output.get("ID").size()-1))+1;
+            }
+            bw.write("\n"+id+" "+userName+" "+pin+" "+"NA");
             bw.close();
+            addCustomerToCollateral(id, userName);
             Customer customer = new Customer(id, userName);
             return new ArrayList<Object>(){{add(true); add(customer);}};
         }catch (Throwable e){
@@ -73,4 +79,20 @@ public class Bank {
             return new ArrayList<Object>(){{add(false); add(null);}};
         }
     }
+
+
+
+
+    private static void addCustomerToCollateral(int id, String userName) {
+        try{
+            FileWriter fw = new FileWriter("Service/collateral.txt", true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write("\n"+id+" "+userName+" "+"true");
+            bw.close();
+            System.out.println("Finished adding the new customer to collateral.txt");
+        }catch (Throwable e){
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -63,6 +63,7 @@ public class LoanWindow extends JFrame {
                 content.getInfoSections().get(found).get("Amount").setText(loans.get("amount").get(i));
                 content.getInfoSections().get(found).get("Interest Rate").setText(loans.get("interestRate").get(i));
                 int finalI = i;
+                int finalFound = found;
                 content.getActions().get(found).get("Pay").addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -78,7 +79,8 @@ public class LoanWindow extends JFrame {
                         double newLoanBalance = Double.parseDouble(loans.get("amount").get(finalI)) - Double.parseDouble(amount);
                         String newLine = customerID + " " + newLoanBalance + " " + loans.get("interestRate").get(finalI);
                         try {
-                            fileOperator.changeLine("Service/Loans.txt", finalI - 1, newLine);
+                            fileOperator.changeLine("Service/Loans.txt", finalI, newLine);
+                            content.getInfoSections().get(finalFound).get("Amount").setText(Double.toString(newLoanBalance));
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }

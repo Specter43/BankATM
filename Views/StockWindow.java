@@ -154,7 +154,7 @@ public class StockWindow extends JFrame {
                     content.getInfoSections().get(found).get("Tradable").setText(stocks.get("tradable").get(i));
                     allCurrentStocks.put(stocks.get("name").get(i), Double.parseDouble(stocks.get("price").get(i)));
                     Tradability.put(stocks.get("name").get(i), stocks.get("tradable").get(i));
-                    int finalFound = found;
+                    int finalBuy = found;
                     int finalI = i;
                     content.getActions().get(found).get("Buy").addMouseListener(new MouseAdapter() {
                         @Override
@@ -169,7 +169,7 @@ public class StockWindow extends JFrame {
                                         String line = lines.get(j);
                                         String[] securityAccountInfo = line.split("\\s+");
                                         if (securityAccountInfo[0].equals(customerID)) {
-                                            String stockName = stocks.get("name").get(finalFound);
+                                            String stockName = stocks.get("name").get(finalBuy);
                                             String stockBoughtPrice = stocks.get("price").get(finalI);
                                             // Write text file
                                             securityAccountInfo[2] = Double.toString(Double.parseDouble(securityAccountInfo[2]) - Integer.parseInt(share) * Double.parseDouble(stockBoughtPrice));
@@ -203,8 +203,16 @@ public class StockWindow extends JFrame {
                                                             "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_OPTION);
                                                     if (input == 0) {
                                                         // Update front end
-                                                        contentSell.removeLine(contentSell.getInfoSections().size()-1);
-                                                        contentSell.updateLines();
+                                                        int x;
+                                                        for (x = 0; x < contentSell.getInfoSections().size(); x++) {
+                                                            if (contentSell.getInfoSections().get(x).get("Name").getText().equals(stockName) &&
+                                                                contentSell.getInfoSections().get(x).get("Share").getText().equals(share) &&
+                                                                contentSell.getInfoSections().get(x).get("Price").getText().equals(stockBoughtPrice)) {
+                                                                contentSell.removeLine(x);
+                                                                contentSell.updateLines();
+                                                                break;
+                                                            }
+                                                        }
                                                         // Change text file
                                                         try {
                                                             List<String> lines = Files.readAllLines(Paths.get("Account/SecurityAccounts.txt"));
@@ -218,7 +226,7 @@ public class StockWindow extends JFrame {
                                                                     balanceLabel.setText("<html>Balance USD:<br/>" + securityAccountInfo[2] + "</html>");
                                                                     ArrayList<String> newHoldingStocks = new ArrayList<>();
                                                                     for (int k = 0; k < holdingStocksInfo.length; k++) {
-                                                                        if (k != finalFound) {
+                                                                        if (k != x) {
                                                                             newHoldingStocks.add(holdingStocksInfo[k]);
                                                                         }
                                                                     }
@@ -230,7 +238,7 @@ public class StockWindow extends JFrame {
 
                                                         }
                                                         // Calculate Realized Profit
-                                                        List<Object> stockToSell = allBoughtStocks.remove(finalFound);
+                                                        List<Object> stockToSell = allBoughtStocks.remove(x);
                                                         realizedProfit += (int) stockToSell.get(1) * allCurrentStocks.get(stockToSell.get(0)) - (int) stockToSell.get(1) * (double) stockToSell.get(2);
                                                         realizedProfitLabel.setText("<html>Realized Profit:<br/>" + realizedProfit + "</html>");
 
@@ -299,8 +307,17 @@ public class StockWindow extends JFrame {
                                                     "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_OPTION);
                                             if (input == 0) {
                                                 // Update front end
-                                                contentSell.removeLine(finalFound);
-                                                contentSell.updateLines();
+                                                int x;
+                                                for (x = 0; x < contentSell.getInfoSections().size(); x++) {
+                                                    if (contentSell.getInfoSections().get(x).get("Name").getText().equals(stockName) &&
+                                                        contentSell.getInfoSections().get(x).get("Share").getText().equals(stockHoldingShares) &&
+                                                        contentSell.getInfoSections().get(x).get("Price").getText().equals(stockHoldingPrice)) {
+                                                        contentSell.removeLine(x);
+                                                        contentSell.updateLines();
+                                                        break;
+                                                    }
+                                                }
+
                                                 // Change text file
                                                 try {
                                                     List<String> lines = Files.readAllLines(Paths.get("Account/SecurityAccounts.txt"));
@@ -314,7 +331,7 @@ public class StockWindow extends JFrame {
                                                             balanceLabel.setText("<html>Balance USD:<br/>" + securityAccountInfo[2] + "</html>");
                                                             ArrayList<String> newHoldingStocks = new ArrayList<>();
                                                             for (int k = 0; k < holdingStocksInfo.length; k++) {
-                                                                if (k != finalFound) {
+                                                                if (k != x) {
                                                                     newHoldingStocks.add(holdingStocksInfo[k]);
                                                                 }
                                                             }
@@ -326,7 +343,7 @@ public class StockWindow extends JFrame {
 
                                                 }
                                                 // Calculate Realized Profit
-                                                List<Object> stockToSell = allBoughtStocks.remove(finalFound);
+                                                List<Object> stockToSell = allBoughtStocks.remove(x);
                                                 realizedProfit += (int) stockToSell.get(1) * allCurrentStocks.get(stockToSell.get(0)) - (int) stockToSell.get(1) * (double) stockToSell.get(2);
                                                 realizedProfitLabel.setText("<html>Realized Profit:<br/>" + realizedProfit + "</html>");
 

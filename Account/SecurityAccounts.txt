@@ -1,1 +1,2 @@
 personnelID/accID/BalanceUSD/HoldingStocks
+0 10000 0.0 []

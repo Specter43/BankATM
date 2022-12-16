@@ -34,6 +34,10 @@ public class Customer extends Personnel {
         return (AccountSaving) accounts.get("Saving");
     }
 
+    public AccountSecurity getSecurity(){
+        return (AccountSecurity) accounts.get("Security");
+    }
+
 
     public void findAllAccounts(Customer customer) {
         FileOperator fileOperator = new FileOperator();

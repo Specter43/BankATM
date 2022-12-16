@@ -2,6 +2,7 @@ package Views;
 
 import Account.AccountChecking;
 import Account.AccountSaving;
+import Account.AccountSecurity;
 import Personnel.Customer;
 import Views.CustomeComponents.ButtonList;
 
@@ -80,16 +81,14 @@ public class SpecificCustomerWindow extends JFrame{
     }
 
     private void createWindow(String checkerMode, Customer customer) {
-        CenterPanel.setLayout(new GridLayout(2,1));
+        CenterPanel.setLayout(new GridLayout(3,1));
         if(customer.getChecking() == null){
             initCheckingWithAdd();
         }else{
            initChecking(customer.getChecking());
         }
-
-
-        //NorthPanel.setPreferredSize(new Dimension(0,100));
         CenterPanel.add(checkingAccountsList,BorderLayout.CENTER);
+
         //updateAccountInfoDisplay();
 
         if(customer.getSaving() == null){
@@ -100,6 +99,14 @@ public class SpecificCustomerWindow extends JFrame{
 
         CenterPanel.add(savingAccountsList,BorderLayout.CENTER);
 
+        if(customer.getSecurity() == null){
+            initSecurityWithAdd();
+        }else{
+            initSecurity(customer.getSecurity());
+        }
+
+        CenterPanel.add(securityAccountsList,BorderLayout.CENTER);
+
 
 
         setContentPane(basePanel);
@@ -107,6 +114,53 @@ public class SpecificCustomerWindow extends JFrame{
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
+
+    private void initSecurityWithAdd() {
+
+        System.out.println("Displaying add on security");
+
+        securityAccountsList=  new ButtonList(800,200,defaultColor);
+        ArrayList<String> checkingSections = new ArrayList<>();
+        ArrayList<String> checkingButtons= new ArrayList<>();
+        checkingButtons.add("Add");
+        securityAccountsList.initLayout(50,10,checkingSections,checkingButtons);
+        securityAccountsList.addOneLine(50,10,1,checkingSections,checkingButtons);
+        securityAccountsList.getActions().get(0).get("Add").addMouseListener(
+
+                new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        super.mouseClicked(e);
+                        Customer.createAccount("security",customerName.getID());
+                        customerName.findAllAccounts(customerName);
+                        initSecurity(customerName.getSecurity());
+                        CenterPanel.remove(2);
+                        CenterPanel.add(securityAccountsList,2);
+                        CenterPanel.revalidate();
+                        CenterPanel.repaint();
+                    }
+                }
+        );
+
+
+        current.invalidate();
+        current.revalidate();
+        current.repaint();
+    }
+
+    private void initSecurity(AccountSecurity security) {
+        securityAccountsList=  new ButtonList(800,200,defaultColor);
+        this.repaint();
+
+        ArrayList<String> securitySections = new ArrayList<>();
+        ArrayList<String> securityButtons= new ArrayList<>();
+        securitySections.add("Account#");
+        securitySections.add("BalanceUSD");
+        securityAccountsList.initLayout(50,10,securitySections,securityButtons);
+        securityAccountsList.addOneLine(50,10,1,securitySections,securityButtons);
+        securityAccountsList.getInfoSections().get(0).get("Account#").setText(security.getAccID());
+        securityAccountsList.getInfoSections().get(0).get("BalanceUSD").setText(Double.toString( security.getUSDBalance()));
     }
 
     private void initChecking(AccountChecking account){
